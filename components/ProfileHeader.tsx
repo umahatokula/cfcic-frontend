@@ -7,6 +7,7 @@ type ProfileHeaderProps = {
   heading: string;
   subHeading: string;
   showBackButton: boolean;
+  backUrl?: string;
 };
 
 const style = {
@@ -14,17 +15,17 @@ const style = {
 };
 
 function ProfileHeader(props: ProfileHeaderProps) {
-  const { activeStep, heading, subHeading, showBackButton = false } = props;
-  const steps = [1, 2, 3, 4, 5];
+  const { activeStep, heading, subHeading, showBackButton = false, backUrl="/" } = props;
+  const steps = [1, 2, 3, 4];
   return (
     <div className="relative">
       <div className="w-full">
         {showBackButton && (
-          <Link href="/profile/biodata">
+          <Link href={backUrl}>
             <FaArrowLeftLong className="absolute top-3 left-2" />
           </Link>
         )}
-        <p className="text-center h1 mb-4">Set Up Your Profile</p>
+        <p className="text-center text-[25px] leading-[30px] font-normal mb-4">Set Up Your Profile</p>
       </div>
       <div className="w-full flex items-center">
         {steps.map((val) => (

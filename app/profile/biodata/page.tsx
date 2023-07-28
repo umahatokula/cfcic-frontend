@@ -5,20 +5,20 @@ import Button from "@/components/forms/Button";
 import { useForm } from "react-hook-form";
 import React from "react";
 import Image from "next/image";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import { BioDataInputs } from "@/types";
 
 function BioDataPage() {
-    const router = useRouter()
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<BioDataInputs>();
-  const onSubmit: SubmitHandler<BioDataInputs> = (data: any) =>{
-    console.log(data)
-    router.push('/profile/kids')
+  const onSubmit: SubmitHandler<BioDataInputs> = (data: any) => {
+    console.log(data);
+    router.push("/profile/kids");
   };
 
   return (
