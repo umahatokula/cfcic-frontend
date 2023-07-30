@@ -2,6 +2,11 @@ import DefaultLayout from "@/components/layouts/Default";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import NavBar from "@/components/user_dashboard";
+import Card from "@/components/Card";
+import Account from "@/components/Account";
+import Administrative from "@/components/Administrative";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +22,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <DefaultLayout>{children}</DefaultLayout>
+      <body>
+        <DefaultLayout>
+          {children}
+        </DefaultLayout>
       </body>
     </html>
   );
