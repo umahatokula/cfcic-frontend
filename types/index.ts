@@ -52,3 +52,19 @@ export type FinancialCommitmentInputs = {
   partnershipArm: number;
   partnershipFrequency: string;
 };
+
+export type Event = {
+  id: string;
+  name: string;
+  tagline: string;
+  banner_image: string;
+  start_date: string;
+  end_date: string;
+  attendances: number;
+  walk_ins: number;
+  eventService: number;
+};
+
+export type EventProps = {
+  event: Event;
+};
