@@ -3,10 +3,10 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-})
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +20,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={roboto.className}>{children} </body>
+      <body className={roboto.className}>
+        <div className="w-full flex justify-center bg-[#FBFBFB]">
+          {/* <Alert /> */}
+          <main className="w-full laptop:w-[550px] desktop:w-[600px] min-h-screen shadow bg-white text-gray-800">
+            {children}
+          </main>
+        </div>
+      </body>
     </html>
   );
 }

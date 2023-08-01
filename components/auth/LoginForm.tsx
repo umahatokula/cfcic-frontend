@@ -64,12 +64,9 @@ function LoginForm() {
       </div>
 
       <div className="mt-16">
-        <Button
-          bgColor="bg-accent"
-          textColor="text-white"
-          type="button"
-          btnText="Login"
-        />
+        <button type="submit" className="form-control">
+          Login
+        </button>
       </div>
     </form>
   );
