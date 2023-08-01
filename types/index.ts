@@ -52,3 +52,10 @@ export type FinancialCommitmentInputs = {
   partnershipArm: number;
   partnershipFrequency: string;
 };
+
+export type DashboardCard = {
+  link: string;
+  img: string;
+  heading: string;
+  body: string;
+};

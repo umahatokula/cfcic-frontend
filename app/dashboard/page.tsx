@@ -1,6 +1,6 @@
 import Account from '@/components/Account';
 import Administrative from '@/components/Administrative';
-import Card from '@/components/Card';
+import DashboardCard from '@/components/DashboardCard';
 import React from 'react'
 
 function DashboardPage() {
@@ -8,54 +8,54 @@ function DashboardPage() {
     <>
       <p className="text-base font-medium text-center mt-10">Dashboard</p>
       <div className="w-full grid grid-cols-2 gap-5 mt-5">
-        <Card
+        <DashboardCard
           heading="WordShop"
-          Body="Buy Mp3 messages, books"
+          body="Buy Mp3 messages, books"
           img="/customer_support.svg"
           link="/"
         />
-        <Card
+        <DashboardCard
           heading="Growth Track"
-          Body="Complete 4 short modules and become a full member of CFCIC"
+          body="Complete 4 short modules and become a full member of CFCIC"
           img="/up.png"
           link="/"
         />
-        <Card
+        <DashboardCard
           heading="Finance"
-          Body="Partnership, Tithes, Offerings and Seeds"
+          body="Partnership, Tithes, Offerings and Seeds"
           img="/cash.png"
           link="/"
         />
-        <Card
+        <DashboardCard
           heading="Events"
-          Body="Register for Believers’ Conventions & Faith Adventures"
+          body="Register for Believers’ Conventions & Faith Adventures"
           img="/20.png"
           link="/"
         />
-        <Card
+        <DashboardCard
           heading="Publications"
-          Body="Higher Life Magazine, Euphoria Devotional"
+          body="Higher Life Magazine, Euphoria Devotional"
           img="/30.png"
           link="/"
         />
-        <Card
+        <DashboardCard
           heading="NCBI"
-          Body="Enrol for courses in the New Creation Bible Institute"
+          body="Enrol for courses in the New Creation Bible Institute"
           img="/nc.png"
           link="/"
         />
       </div>
       <p className="text-base font-medium text-center mt-10">Manage Account</p>
       <div className="w-full grid grid-cols-2 gap-5 mt-5">
-        <Card
+        <DashboardCard
           heading="My Profile"
-          Body="Update profile"
+          body="Update profile"
           img="/use.png"
           link="/"
         />
-        <Card
+        <DashboardCard
           heading="Settings"
-          Body="Manage personal preferences, Notifications"
+          body="Manage personal preferences, Notifications"
           img="/see.png"
           link="/"
         />
@@ -64,27 +64,27 @@ function DashboardPage() {
         Administrative Handles
       </p>
       <div className="w-full grid grid-cols-2 gap-5 mt-5">
-        <Card
+        <DashboardCard
           heading="Life Care Crew"
-          Body="Edit profile, Set preferences"
+          body="Edit profile, Set preferences"
           img="/link.png"
           link="/"
         />
-        <Card
+        <DashboardCard
           heading="Partnership"
-          Body="Manage partnership details for your centre"
+          body="Manage partnership details for your centre"
           img="/pa.png"
           link="/"
         />
-        <Card
+        <DashboardCard
           heading="Service Team"
-          Body="Manage the details of your team & share reports"
+          body="Manage the details of your team & share reports"
           img="/men.png"
           link="/"
         />
-        <Card
+        <DashboardCard
           heading="Home Cell"
-          Body="Manage details for your home cell"
+          body="Manage details for your home cell"
           img="/home.png"
           link="/"
         />
