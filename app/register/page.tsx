@@ -1,5 +1,6 @@
 import Separator from "@/components/Separator";
 import SocialLogin from "@/components/SocialLogin";
+import RegistrationForm from "@/components/auth/RegistrationForm";
 import Link from "next/link";
 import React from "react";
 
@@ -22,6 +23,10 @@ function RegisterPage() {
       <Separator text="or" />
 
       <SocialLogin iconPath="/gmail.svg" text="Gmail" />
+
+      <div className="w-full mt-8">
+        <RegistrationForm />
+      </div>
 
       <p className="text-base text-center font-semibold mt-16">
         By registering you agree to CFCIC{" "}

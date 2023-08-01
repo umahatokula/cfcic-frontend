@@ -1,4 +1,4 @@
-import LoginForm from "@/components/LoginForm";
+import LoginForm from "@/components/auth/LoginForm";
 import Separator from "@/components/Separator";
 import SocialLogin from "@/components/SocialLogin";
 import Link from "next/link";
