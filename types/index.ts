@@ -3,6 +3,12 @@ export type LoginFormInputs = {
   password: string;
 };
 
+export type RegistrationFormInputs = {
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+};
+
 export type BioDataInputs = {
   isMember: boolean;
   phone: string;
@@ -68,3 +74,8 @@ export type Event = {
 export type EventProps = {
   event: Event;
 };
+
+export type InfoCardProps = {
+  iconUrl: string;
+  content: string;
+}
