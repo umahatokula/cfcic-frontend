@@ -47,14 +47,22 @@ body {
   @apply w-full rounded-xl h-[55px] border-2 bg-transparent px-4;
 }
 
+.form__input_error, .form__select_error {
+  @apply w-full rounded-xl h-[55px] border border-red-600 bg-transparent px-4;
+}
+
+.form__btn__default {
+  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-5 bg-accent text-white border-[#77858C];
+}
+
 .form__btn__default {
   @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-5 bg-accent text-white border-[#77858C];
 }
 
 .link__btn__default {
-  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-5 bg-accent text-white border-[#77858C];
+  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-5 bg-accent text-white border-[#77858C] block;
 }
 
 .link__btn__outline-primary {
-  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-5 bg-transparent text-[#03045E] border-[1.5px] border-[#03045E];
+  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-5 bg-transparent text-[#03045E] border-[1.5px] border-[#03045E] block;
 }

@@ -1,4 +1,3 @@
-import DefaultLayout from "@/components/layouts/Default";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -18,7 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <DefaultLayout>{children}</DefaultLayout>
+        <div className="w-full flex justify-center bg-[#FBFBFB]">
+          <main className="w-full laptop:w-[550px] desktop:w-[600px] min-h-screen shadow bg-white text-gray-800">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );

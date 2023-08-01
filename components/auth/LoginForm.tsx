@@ -2,10 +2,10 @@
 
 import React from "react";
 import { useForm } from "react-hook-form";
-import Button from "./forms/Button";
 import Image from "next/image";
 import { PiEyeLight, PiEyeSlashLight } from "react-icons/pi";
 import { LoginFormInputs } from "@/types";
+import Button from "../forms/Button";
 
 function LoginForm() {
   const [showPasswordField, setShowPasswordField] = React.useState(false);
