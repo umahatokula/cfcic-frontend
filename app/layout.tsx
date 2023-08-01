@@ -14,15 +14,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>
-        <div className="w-full flex justify-center bg-[#FBFBFB]">
-          <main className="w-full laptop:w-[550px] desktop:w-[600px] min-h-screen shadow bg-white text-gray-800">
-            {children}
-          </main>
-        </div>
-      </body>
-    </html>
-  );
+    return (
+      <html lang="en">
+        <body className={inter.className}>
+          <DefaultLayout>{children}</DefaultLayout>
+        </body>
+      </html>
+    );
 }
