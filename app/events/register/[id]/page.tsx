@@ -25,7 +25,9 @@ function page() {
         How would you be attending?
       </p>
 
-      <button className="form__btn__default mt-10">Physically</button>
+      <form>
+        <button className="form__btn__default mt-10">Physically</button>
+      </form>
       <button className="link__btn__outline-primary mt-8">Online</button>
     </div>
   );

@@ -1,12 +1,12 @@
-import Account from '@/components/Account';
-import Administrative from '@/components/Administrative';
 import DashboardCard from '@/components/DashboardCard';
+import RegistrationPageDivider from '@/components/events/registration/RegistrationPageDivider';
 import React from 'react'
 
 function DashboardPage() {
   return (
     <>
-      <p className="text-base font-medium text-center mt-10">Dashboard</p>
+      <RegistrationPageDivider />
+      <p className="text-base font-medium text-center mb-10 mt-3">Dashboard</p>
       <div className="w-full grid grid-cols-2 gap-5 mt-5">
         <DashboardCard
           heading="WordShop"
@@ -30,7 +30,7 @@ function DashboardPage() {
           heading="Events"
           body="Register for Believers’ Conventions & Faith Adventures"
           img="/20.png"
-          link="/"
+          link="/events"
         />
         <DashboardCard
           heading="Publications"
@@ -45,7 +45,8 @@ function DashboardPage() {
           link="/"
         />
       </div>
-      <p className="text-base font-medium text-center mt-10">Manage Account</p>
+      <RegistrationPageDivider />
+      <p className="text-base font-medium text-center mb-10 mt-3">Manage Account</p>
       <div className="w-full grid grid-cols-2 gap-5 mt-5">
         <DashboardCard
           heading="My Profile"
@@ -60,7 +61,8 @@ function DashboardPage() {
           link="/"
         />
       </div>
-      <p className="text-base font-medium text-center m-10">
+      <RegistrationPageDivider />
+      <p className="text-base font-medium text-center mb-10 mt-3">
         Administrative Handles
       </p>
       <div className="w-full grid grid-cols-2 gap-5 mt-5">

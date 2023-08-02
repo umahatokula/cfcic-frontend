@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
+import Provider from "./Provider";
 
 const roboto = Roboto({
   weight: "400",
@@ -21,12 +22,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <div className="w-full flex justify-center bg-[#FBFBFB]">
-          {/* <Alert /> */}
-          <main className="w-full laptop:w-[550px] desktop:w-[600px] min-h-screen shadow bg-white text-gray-800">
-            {children}
-          </main>
-        </div>
+        <Provider>
+          <div className="w-full flex justify-center bg-[#FBFBFB]">
+            {/* <Alert /> */}
+            <main className="w-full laptop:w-[550px] desktop:w-[600px] min-h-screen shadow bg-white text-gray-800">
+              {children}
+            </main>
+          </div>
+        </Provider>
       </body>
     </html>
   );

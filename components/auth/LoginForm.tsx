@@ -5,20 +5,39 @@ import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { PiEyeLight, PiEyeSlashLight } from "react-icons/pi";
 import { LoginFormInputs } from "@/types";
-import Button from "../forms/Button";
+import axios from "axios";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { redirect } from "next/navigation";
+import * as yup from "yup";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+
+const schema = yup.object({
+  email: yup.string().required("Email is required"),
+  password: yup.string().required("Password is required"),
+});
 
 function LoginForm() {
   const [showPasswordField, setShowPasswordField] = React.useState(false);
+  const router = useRouter();
+  
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<LoginFormInputs>();
-  const onSubmit: SubmitHandler<LoginFormInputs> = (data: any) =>
-    console.log(data);
-
-  console.log(watch("email")); // watch input value by passing the name of it
+  } = useForm<LoginFormInputs>({
+    resolver: yupResolver(schema),
+  });
+  const onSubmit: SubmitHandler<LoginFormInputs> = async (data: any, e: any) => {
+    e.preventDefault();
+    console.log("data", data);
+    const result = await signIn("credentials", {
+      ...data,
+      redirect: true,
+      callbackUrl: "/dashboard",
+    });
+  }
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
@@ -26,20 +45,30 @@ function LoginForm() {
       <div className="">
         <div className="">
           <label>Email</label>
-          <div className="form__input flex justify-between">
+          <div
+            className={`${
+              errors.email ? "form__input_error" : "form__input"
+            } flex justify-between`}
+          >
             <input
               className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
               type="email"
               {...register("email", { required: true })}
             />
-            {errors.email && <span>This field is required</span>}
+          </div>
+          <div className="text-red-600">
+            {errors.email && <span>{errors.email?.message}</span>}
           </div>
         </div>
       </div>
       <div className="mt-6">
         <div className="">
           <label>Password</label>
-          <div className="form__input flex justify-between items-center">
+          <div
+            className={`${
+              errors.password ? "form__input_error" : "form__input"
+            } flex justify-between items-center`}
+          >
             <input
               className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
               type={showPasswordField ? "text" : "password"}
@@ -58,13 +87,15 @@ function LoginForm() {
                 <PiEyeSlashLight className="w-6 h-6 ml-0" />
               )}
             </div>
-            {errors.password && <span>This field is required</span>}
+          </div>
+          <div className="text-red-600">
+            {errors.password && <span>{errors.password?.message}</span>}
           </div>
         </div>
       </div>
 
       <div className="mt-16">
-        <button type="submit" className="form-control">
+        <button type="submit" className="form__btn__default">
           Login
         </button>
       </div>

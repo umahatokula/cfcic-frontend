@@ -1,8 +1,11 @@
+"use client";
+
 import Separator from "@/components/Separator";
 import SocialLogin from "@/components/SocialLogin";
 import RegistrationForm from "@/components/auth/RegistrationForm";
 import Link from "next/link";
 import React from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 function RegisterPage() {
   return (
@@ -36,9 +39,9 @@ function RegisterPage() {
 
       <p className="text-base text-center font-semibold mt-12">
         Already registered? Please{" "}
-        <Link href={"/login"}>
-          <span className="text-accent">Sign In</span>
-        </Link>
+          <span className="text-accent cursor-pointer" onClick={() => signIn()}>
+            Sign In
+          </span>
       </p>
     </div>
   );
