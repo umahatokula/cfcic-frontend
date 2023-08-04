@@ -10,15 +10,53 @@ export type RegistrationFormInputs = {
 };
 
 export type BioDataInputs = {
-  isMember: boolean;
-  phone: string;
+  userId: number;
+  phone_number: string;
   occupation: string;
   birthday: string;
-  maritalStatusId: number;
-  marriageAnniversary: string;
-  gotKids: number;
-  tellUsUsAboutYourKids: boolean;
+  marital_status: number;
+  marriage_anniversary: string;
+  is_church_member: number;
+  dependents: Dependent[];
+  got_kids: boolean;
+  tell_us_about_your_kids: boolean;
+  church_join_date: string;
+  church_centre_id: number;
+  growth_track_completed: boolean;
+  service_team: ProfileServiceTeam[];
+  home_cell_id: number;
+  colony_id: number;
+  roles_and_responsibilities: RolesAndResponsibilitiesProfile[];
+  is_tither: boolean;
+  is_partner: boolean;
+  partnered_arms: ChurchArmProfile;
+  payment_interval: string;
 };
+
+export type Dependent = {
+  first_name: string;
+  last_name: string;
+  birthday: string;
+  allergies: string;
+  emergency_contact: string
+  parent_profile_id: string
+  // event_attendances AttendanceDependent[]
+}
+
+export type ProfileServiceTeam = {
+  service_team_id: number;
+  profile_id: number;
+}
+
+export type RolesAndResponsibilitiesProfile = {
+  role_responsibility_id: number;
+  profile_id: number;
+}
+
+export type ChurchArmProfile = {
+  church_arm_id: number;
+  profile_id: number;
+}
 
 export type KidsDataInputs = {
   isMember: boolean;
@@ -38,7 +76,7 @@ export type NewKid = {
   emergency_contact: string;
 };
 
-export type TaskFormInputs = {
+export type NewKidInputs = {
   newKid: NewKid;
 };
 

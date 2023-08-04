@@ -7,8 +7,13 @@ import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { BioDataInputs } from "@/types";
+import { useAppStore } from "@/lib/store";
+import { useSession } from "next-auth/react";
 
 function BioDataPage() {
+
+  const { biodata, setBiodata } = useAppStore();
+
   const router = useRouter();
   const {
     register,
@@ -16,7 +21,7 @@ function BioDataPage() {
     watch,
     formState: { errors },
   } = useForm<BioDataInputs>();
-  const onSubmit: SubmitHandler<BioDataInputs> = (data: any) => {
+  const onSubmit = (data: any) => {
     console.log(data);
     router.push("/profile/kids");
   };
@@ -36,13 +41,13 @@ function BioDataPage() {
             <div className="form__input flex justify-between">
               <select
                 className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
-                {...register("phone", { required: true })}
+                {...register("is_church_member", { required: true })}
               >
                 <option value="1">Yes</option>
                 <option value="0">No</option>
               </select>
             </div>
-            {errors.isMember && (
+            {errors.is_church_member && (
               <span className="text-red-500 text-xs">
                 This field is required
               </span>
@@ -55,10 +60,10 @@ function BioDataPage() {
               <input
                 className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
                 type="text"
-                {...register("phone", { required: true })}
+                {...register("phone_number", { required: true })}
               />
             </div>
-            {errors.phone && (
+            {errors.phone_number && (
               <span className="text-red-500 text-xs">
                 This field is required
               </span>
@@ -109,7 +114,7 @@ function BioDataPage() {
             <div className="form__input flex justify-between">
               <select
                 className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
-                {...register("maritalStatusId")}
+                {...register("marital_status")}
               >
                 <option value="1">Single</option>
                 <option value="2">Married</option>
@@ -117,7 +122,7 @@ function BioDataPage() {
                 <option value="4">Divorced</option>
               </select>
             </div>
-            {errors.maritalStatusId && (
+            {errors.marital_status && (
               <span className="text-red-500 text-xs">
                 This field is required
               </span>
@@ -131,7 +136,7 @@ function BioDataPage() {
                 className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
                 type="date"
                 placeholder="Select a date..."
-                {...register("marriageAnniversary")}
+                {...register("marriage_anniversary")}
               />
               <Image
                 className="ml-4"
@@ -141,7 +146,7 @@ function BioDataPage() {
                 height={15}
               />
             </div>
-            {errors.marriageAnniversary && (
+            {errors.marriage_anniversary && (
               <span className="text-red-500 text-xs">
                 This field is required
               </span>
@@ -153,7 +158,7 @@ function BioDataPage() {
             <div className="form__input flex justify-between">
               <select
                 className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
-                {...register("gotKids")}
+                {...register("got_kids")}
               >
                 <option value="0">No kids yet</option>
                 <option value="1">1</option>
@@ -164,7 +169,7 @@ function BioDataPage() {
                 <option value="6">6</option>
               </select>
             </div>
-            {errors.gotKids && <span>This field is required</span>}
+            {errors.got_kids && <span>This field is required</span>}
           </div>
 
           <div className="">
@@ -173,7 +178,7 @@ function BioDataPage() {
                 <input
                   type="radio"
                   className="radio checked:border-black border-black"
-                  {...register("tellUsUsAboutYourKids")}
+                  {...register("tell_us_about_your_kids")}
                 />
                 <span className="">Tell us a bit about your kids</span>
               </label>
@@ -183,13 +188,13 @@ function BioDataPage() {
                 <input
                   type="radio"
                   className="radio checked:border-black border-black"
-                  {...register("tellUsUsAboutYourKids")}
+                  {...register("tell_us_about_your_kids")}
                 />
                 <span className="">Please remind me later</span>
               </label>
             </div>
           </div>
-          {errors.tellUsUsAboutYourKids && (
+          {errors.tell_us_about_your_kids && (
             <span className="text-red-500 text-xs">This field is required</span>
           )}
         </div>

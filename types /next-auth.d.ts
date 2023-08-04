@@ -11,6 +11,8 @@ declare module "next-auth" {
       zip: string;
       role: string;
       accessToken: string;
+      statusCode?: number;
+      message?: string;
     };
   }
 }

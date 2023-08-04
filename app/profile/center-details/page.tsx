@@ -17,7 +17,7 @@ function CenterDetailPage() {
     watch,
     formState: { errors },
   } = useForm<CenterDetailsInputs>();
-  const onSubmit: SubmitHandler<CenterDetailsInputs> = (data: any) => {
+  const onSubmit = (data: any) => {
     console.log(data);
     // router.push("/profile/financial-commitments");
   };

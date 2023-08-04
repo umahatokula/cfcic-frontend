@@ -10,7 +10,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { redirect } from "next/navigation";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useAppStore } from "@/lib/store";
+import { toast } from "react-hot-toast";
 
 const schema = yup.object({
   email: yup.string().required("Email is required"),
@@ -20,6 +22,7 @@ const schema = yup.object({
 function LoginForm() {
   const [showPasswordField, setShowPasswordField] = React.useState(false);
   const router = useRouter();
+  const { data: session, status } = useSession();
   
   const {
     register,
@@ -29,14 +32,23 @@ function LoginForm() {
   } = useForm<LoginFormInputs>({
     resolver: yupResolver(schema),
   });
-  const onSubmit: SubmitHandler<LoginFormInputs> = async (data: any, e: any) => {
+  const onSubmit = async (data: any, e: any) => {
     e.preventDefault();
-    console.log("data", data);
+
     const result = await signIn("credentials", {
       ...data,
-      redirect: true,
+      redirect: false,
       callbackUrl: "/dashboard",
     });
+
+  if(session?.user?.statusCode === 403) {
+    console.log("Error", session?.user?.message);
+    // toaster(session?.user?.message);
+    toast.error(session?.user?.message);
+  } else {
+    router.push('/dashboard');
+  }
+
   }
 
   return (

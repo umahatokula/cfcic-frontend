@@ -27,7 +27,6 @@ const handler = NextAuth({
           }),
         });
         const user = await res.json();
-        console.log('user', user);
 
         if (user) {
           // Any object returned will be saved in `user` property of the JWT
