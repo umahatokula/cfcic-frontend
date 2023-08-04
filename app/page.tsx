@@ -5,6 +5,10 @@ import { GrLocation } from "react-icons/gr";
 import { BsCalendar2DateFill } from 'react-icons/bs'
 import { AiFillHome } from 'react-icons/ai'
 import { BiHomeAlt2 } from 'react-icons/bi'
+import { GrInstagram } from "react-icons/gr";
+import { FaYoutube } from 'react-icons/fa'
+import { FaFacebook } from 'react-icons/fa'
+import { BsTelegram } from 'react-icons/bs'
 
 export default function Home() {
   return (
@@ -20,7 +24,7 @@ export default function Home() {
       <div className="flex justify-center bg-primary">
         <Image src="/FA23.JPG" height={800} width={800} alt="Hero" />
       </div>
-      <div>
+      <div className="bg-gray-100">
         <h1 className="text-2xl font-extrabold p-3 text-center">
           About Faith Adventure
         </h1>
@@ -30,7 +34,7 @@ export default function Home() {
           ministry of the word and the love of God.
         </p>
       </div>
-      <div className="flex justify-between p-10">
+      <div className="flex justify-between p-10 bg-gray-100">
         <div className="items-center p-5">
           <GrLocation className="mb-3 text-3xl" />
           <h2 className="text-l font-bold">Location</h2>
@@ -44,11 +48,35 @@ export default function Home() {
         </div>
       </div>
       <div className="">
-        <h1 className="bg-cfcblue-400 font-bold text-2xl p-3 text-white rounded-tl-lg rounded-br-lg text-center">
+        <h1 className="bg-cfcblue-400 font-bold text-2xl p-3 text-white rounded-tl-lg rounded-br-lg text-center drop-shadow-md">
           Speakers
         </h1>
       </div>
-      <div>
+      <div className="">
+        <div className="flex justify-center space-x-4 mt-5">
+          <div className="">
+            <Image src="/REVadah.jpg" width={200} height={200} alt="RevAdah" />
+            <h1 className="font-bold">Rev Arome Adah</h1>
+            <p>Savanah Grace Ministries</p>
+          </div>
+          <div>
+            <Image src="/johnibenu.jpg" width={200} height={200} alt="Bishop" />
+            <h1 className="font-bold">Bishop John Ibenu</h1>
+            <p>Chapel of Freedom Intl.</p>
+          </div>
+        </div>
+        <div className="flex justify-center space-x-4 mt-5">
+          <div className="">
+            <Image src="/DUnkaa.jpg" width={200} height={200} alt="RevAdah" />
+            <h1 className="font-bold">Rev Dunka Gomwalk</h1>
+            <p>Covenant Word Chapel</p>
+          </div>
+          <div>
+            <Image src="/REVTokula.jpg" width={200} height={200} alt="Bishop" />
+            <h1 className="font-bold">Rev Arome Tokula</h1>
+            <p>Christ Family Ministries</p>
+          </div>
+        </div>
         <h2 className="text-xl flex justify-center mx-5 my-5 font-semibold">
           Arome Tokula | Arome E Adah | Joshua Tende | Bishop John Ibenu | PB
           Philips | Dunka Gomwalk | Frederick Sule
@@ -78,6 +106,30 @@ export default function Home() {
             Accomondation & Feeding
           </h1>
           <p className="text-gray-300">Free Accomondation and Feeding </p>
+        </div>
+        <div className="flex justify-center text-white mt-5">
+          <div>
+            <h1>Follow The Conversation</h1>
+            <div className="flex justify-center space-x-3 mt-3 mb-5">
+              <Link href="https://www.instagram.com/_christfamilyministry/">
+                <GrInstagram />
+              </Link>
+              <Link href="https://www.youtube.com/@ChristFamilyMinistry">
+                <FaYoutube />
+              </Link>
+              <Link href="https://web.facebook.com/christfamilyministry">
+                <FaFacebook />
+              </Link>
+              <Link href="https://t.me/pastorarome">
+                <BsTelegram />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="p-5">
+          <h1>Christ Family Ministries</h1>
         </div>
       </div>
     </>
