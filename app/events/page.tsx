@@ -5,7 +5,7 @@ import EventCard from "@/components/events/EventCard";
 
 async function EventsPage() {
   const events: Event[] = await getEvents();
-  const [upcomingEvent, ...otherevents]: [Event, ...Event[]] = events;
+  const [upcomingEvent, ...otherevents] = events;
   return (
     <div>
       <p className="text-[20px] leading-[30px] font-normal text-[#01080D] mb-8">

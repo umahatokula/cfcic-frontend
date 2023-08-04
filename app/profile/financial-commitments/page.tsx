@@ -16,7 +16,7 @@ function FinancialCommitmentsPage() {
     watch,
     formState: { errors },
   } = useForm<FinancialCommitmentInputs>();
-  const onSubmit: SubmitHandler<FinancialCommitmentInputs> = (data: any) => {
+  const onSubmit = (data: any) => {
     console.log(data);
     // router.push("/profile/financial-commitments");
   };

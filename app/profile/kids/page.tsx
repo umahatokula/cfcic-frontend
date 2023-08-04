@@ -2,7 +2,7 @@
 
 import ProfileHeader from "@/components/ProfileHeader";
 import Button from "@/components/forms/Button";
-import { KidsDataInputs, NewKid, TaskFormInputs } from "@/types";
+import { KidsDataInputs, NewKid, NewKidInputs } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -16,10 +16,10 @@ function AddKidsPage() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<TaskFormInputs>();
+  } = useForm<NewKidInputs>();
   const [kids, setKids] = React.useState<NewKid[]>([]);
 
-  const handleAddTask = ({ newKid }: TaskFormInputs) => {
+  const handleAddTask = ({ newKid }: NewKidInputs) => {
     if (
       newKid.name.trim() !== "" &&
       newKid.birthday &&
@@ -43,7 +43,7 @@ function AddKidsPage() {
         showBackButton={true}
         heading="Register Your Kids"
         subHeading="Please tell us a little bit about your kids"
-        backUrl={'profile/biodata'}
+        backUrl={'biodata'}
       />
 
       <div>

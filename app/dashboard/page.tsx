@@ -1,10 +1,15 @@
+"use client";
+
 import DashboardCard from '@/components/DashboardCard';
 import RegistrationPageDivider from '@/components/events/registration/RegistrationPageDivider';
+import { useSession } from 'next-auth/react';
 import React from 'react'
 
 function DashboardPage() {
+  const { data: session, status } = useSession();
   return (
     <>
+      <pre>{JSON.stringify(session, null, 2)}</pre>
       <RegistrationPageDivider />
       <p className="text-base font-medium text-center mb-10 mt-3">Dashboard</p>
       <div className="w-full grid grid-cols-2 gap-5 mt-5">
@@ -46,7 +51,9 @@ function DashboardPage() {
         />
       </div>
       <RegistrationPageDivider />
-      <p className="text-base font-medium text-center mb-10 mt-3">Manage Account</p>
+      <p className="text-base font-medium text-center mb-10 mt-3">
+        Manage Account
+      </p>
       <div className="w-full grid grid-cols-2 gap-5 mt-5">
         <DashboardCard
           heading="My Profile"

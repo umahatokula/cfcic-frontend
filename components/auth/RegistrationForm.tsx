@@ -30,7 +30,7 @@ function RegistrationForm() {
   } = useForm<RegistrationFormInputs>({
     resolver: yupResolver(schema),
   });
-  const onSubmit: SubmitHandler<RegistrationFormInputs> = async (data: any, e: any) => {
+  const onSubmit = async (data: any, e: any) => {
     console.log("data", data);
     try {
       const res = await axios({
