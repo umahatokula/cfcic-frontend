@@ -38,7 +38,7 @@ export default function Home() {
         <div className="items-center p-5">
           <GrLocation className="mb-3 text-3xl" />
           <h2 className="text-l font-bold">Location</h2>
-          Christ Family Center (Theatre of faith)
+          Christ Family Center, Gboko (Theatre of faith)
         </div>
 
         <div className="p-5">
@@ -55,29 +55,80 @@ export default function Home() {
       <div className="">
         <div className="flex justify-center space-x-4 mt-5">
           <div className="">
-            <Image src="/REVadah.jpg" width={200} height={200} alt="RevAdah" />
-            <h1 className="font-bold">Rev Arome Adah</h1>
-            <p>Savanah Grace Ministries</p>
+            <Image
+              src="/REVadah.jpg"
+              width={200}
+              height={200}
+              alt="RevAdah"
+              className="drop-shadow-md rounded-md"
+            />
+            <h1 className="font-bold text-gray-700 mt-4">Rev Arome Adah</h1>
+            <p className='text-gray-600'>Savanah Grace Ministries</p>
           </div>
           <div>
-            <Image src="/johnibenu.jpg" width={200} height={200} alt="Bishop" />
-            <h1 className="font-bold">Bishop John Ibenu</h1>
-            <p>Chapel of Freedom Intl.</p>
+            <Image
+              src="/johnibenu.jpg"
+              width={200}
+              height={200}
+              alt="Bishop"
+              className="drop-shadow-md rounded-md"
+            />
+            <h1 className="font-bold text-gray-700 mt-4">Bishop John Ibenu</h1>
+            <p className='text-gray-600'>Chapel of Freedom Intl.</p>
           </div>
         </div>
         <div className="flex justify-center space-x-4 mt-5">
           <div className="">
-            <Image src="/DUnkaa.jpg" width={200} height={200} alt="RevAdah" />
-            <h1 className="font-bold">Rev Dunka Gomwalk</h1>
-            <p>Covenant Word Chapel</p>
+            <Image
+              src="/DUnkaa.jpg"
+              width={200}
+              height={200}
+              alt="RevAdah"
+              className="drop-shadow-lg rounded-md"
+            />
+            <h1 className="font-bold text-gray-700 mt-4">Rev Dunka Gomwalk</h1>
+            <p className='text-gray-600'>
+              Covenant Word Christian <br />
+              Center
+            </p>
           </div>
           <div>
-            <Image src="/REVTokula.jpg" width={200} height={200} alt="Bishop" />
-            <h1 className="font-bold">Rev Arome Tokula</h1>
-            <p>Christ Family Ministries</p>
+            <Image
+              src="/REVTokula.jpg"
+              width={200}
+              height={200}
+              alt="Bishop"
+              className="drop-shadow-md rounded-md"
+            />
+            <h1 className="font-bold text-gray-700 mt-4">Rev Arome Tokula</h1>
+            <p className='text-gray-600'>Christ Family Ministries (Host)</p>
           </div>
         </div>
-        <h2 className="text-xl flex justify-center mx-5 my-5 font-semibold">
+        <div className="flex justify-center space-x-4 mt-5">
+          <div className="">
+            <Image
+              src="/PastorFred.jpg"
+              width={200}
+              height={300}
+              alt="RevAdah"
+              className="drop-shadow-md rounded-md"
+            />
+            <h1 className="font-bold mt-4">Pastor Frederick Sule</h1>
+            <p>The Rebuilder's House</p>
+          </div>
+          <div>
+            <Image
+              src="/RevTende.jpg"
+              width={200}
+              height={200}
+              alt="Bishop"
+              className="drop-shadow-md rounded-md"
+            />
+            <h1 className="font-bold text-gray-700 mt-4">Rev Joshua Tende</h1>
+            <p>Father's Delight Ministries</p>
+          </div>
+        </div>
+        <h2 className="text-xl flex justify-center mx-5 my-5 font-semibold text-gray-700">
           Arome Tokula | Arome E Adah | Joshua Tende | Bishop John Ibenu | PB
           Philips | Dunka Gomwalk | Frederick Sule
         </h2>
@@ -109,10 +160,10 @@ export default function Home() {
         </div>
         <div className="flex justify-center text-white mt-5">
           <div>
-            <h1>Follow The Conversation</h1>
+            <h1 className="font-bold">Follow The Conversation</h1>
             <div className="flex justify-center space-x-3 mt-3 mb-5">
               <Link href="https://www.instagram.com/_christfamilyministry/">
-                <GrInstagram />
+                <GrInstagram className="hover:bg-gray-800 rounded-md" />
               </Link>
               <Link href="https://www.youtube.com/@ChristFamilyMinistry">
                 <FaYoutube />
