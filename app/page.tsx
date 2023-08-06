@@ -1,10 +1,14 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { AiOutlineBell } from 'react-icons/ai';
+import Image from "next/image";
+import Link from "next/link";
+import { AiOutlineBell } from "react-icons/ai";
 import { GrLocation } from "react-icons/gr";
-import { BsCalendar2DateFill } from 'react-icons/bs'
-import { AiFillHome } from 'react-icons/ai'
-import { BiHomeAlt2 } from 'react-icons/bi'
+import { BsCalendar2DateFill } from "react-icons/bs";
+import { AiFillHome } from "react-icons/ai";
+import { BiHomeAlt2 } from "react-icons/bi";
+import { GrInstagram } from "react-icons/gr";
+import { FaYoutube } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { BsTelegram } from "react-icons/bs";
 
 export default function Home() {
   return (
@@ -20,7 +24,7 @@ export default function Home() {
       <div className="flex justify-center bg-primary">
         <Image src="/FA23.JPG" height={800} width={800} alt="Hero" />
       </div>
-      <div>
+      <div className="bg-gray-100">
         <h1 className="text-2xl font-extrabold p-3 text-center">
           About Faith Adventure
         </h1>
@@ -30,11 +34,11 @@ export default function Home() {
           ministry of the word and the love of God.
         </p>
       </div>
-      <div className="flex justify-between p-10">
+      <div className="flex justify-between p-10 bg-gray-100">
         <div className="items-center p-5">
           <GrLocation className="mb-3 text-3xl" />
           <h2 className="text-l font-bold">Location</h2>
-          Christ Family Center (Theatre of faith)
+          Christ Family Center, Gboko (Theatre of faith)
         </div>
 
         <div className="p-5">
@@ -44,15 +48,82 @@ export default function Home() {
         </div>
       </div>
       <div className="">
-        <h1 className="bg-cfcblue-400 font-bold text-2xl p-3 text-white rounded-tl-lg rounded-br-lg text-center">
+        <h1 className="bg-primary font-bold text-2xl p-3 text-white text-center drop-shadow-md">
           Speakers
         </h1>
       </div>
-      <div>
-        <h2 className="text-xl flex justify-center mx-5 my-5 font-semibold">
-          Arome Tokula | Arome E Adah | Joshua Tende | Bishop John Ibenu | PB
-          Philips | Dunka Gomwalk | Frederick Sule
-        </h2>
+      <div className="">
+        <div className="grid grid-cols-2 gap-5 p-6 mt-5">
+          <div className="">
+            <Image
+              src="/REVadah.jpg"
+              width={200}
+              height={200}
+              alt="RevAdah"
+              className="drop-shadow-md rounded-md"
+            />
+            <h1 className="font-bold text-gray-700 mt-4">Rev Arome Adah</h1>
+            <p className="text-gray-600">Savanah Grace Ministries</p>
+          </div>
+          <div>
+            <Image
+              src="/johnibenu.jpg"
+              width={200}
+              height={200}
+              alt="Bishop"
+              className="drop-shadow-md rounded-md"
+            />
+            <h1 className="font-bold text-gray-700 mt-4">Bishop John Ibenu</h1>
+            <p className="text-gray-600">Chapel of Freedom Intl.</p>
+          </div>
+          <div className="">
+            <Image
+              src="/DUnkaa.jpg"
+              width={200}
+              height={200}
+              alt="RevAdah"
+              className="drop-shadow-lg rounded-md"
+            />
+            <h1 className="font-bold text-gray-700 mt-4">Rev Dunka Gomwalk</h1>
+            <p className="text-gray-600">
+              Covenant Word Christian <br />
+              Center
+            </p>
+          </div>
+          <div>
+            <Image
+              src="/REVTokula.jpg"
+              width={200}
+              height={200}
+              alt="Bishop"
+              className="drop-shadow-md rounded-md"
+            />
+            <h1 className="font-bold text-gray-700 mt-4">Rev Arome Tokula</h1>
+            <p className="text-gray-600">Christ Family Ministries (Host)</p>
+          </div>
+          <div className="">
+            <Image
+              src="/PastorFred.jpg"
+              width={200}
+              height={300}
+              alt="RevAdah"
+              className="drop-shadow-md rounded-md"
+            />
+            <h1 className="font-bold mt-4">Pastor Frederick Sule</h1>
+            <p>The Rebuilder's House</p>
+          </div>
+          <div>
+            <Image
+              src="/RevTende.jpg"
+              width={200}
+              height={200}
+              alt="Bishop"
+              className="drop-shadow-md rounded-md"
+            />
+            <h1 className="font-bold text-gray-700 mt-4">Rev Joshua Tende</h1>
+            <p>Father's Delight Ministries</p>
+          </div>
+        </div>
       </div>
       <div className="bg-primary">
         <div className="items-center p-5">
@@ -78,6 +149,30 @@ export default function Home() {
             Accomondation & Feeding
           </h1>
           <p className="text-gray-300">Free Accomondation and Feeding </p>
+        </div>
+        <div className="flex justify-center text-white mt-5">
+          <div>
+            <h1 className="font-bold">Follow The Conversation</h1>
+            <div className="flex justify-center space-x-3 mt-3 mb-5">
+              <Link href="https://www.instagram.com/_christfamilyministry/">
+                <GrInstagram className="hover:bg-gray-800 rounded-md" />
+              </Link>
+              <Link href="https://www.youtube.com/@ChristFamilyMinistry">
+                <FaYoutube />
+              </Link>
+              <Link href="https://web.facebook.com/christfamilyministry">
+                <FaFacebook />
+              </Link>
+              <Link href="https://t.me/pastorarome">
+                <BsTelegram />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="p-5">
+          <p className="text-[11px] text-center">Christ Family Ministries &copy;</p>
         </div>
       </div>
     </>
