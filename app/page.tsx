@@ -1,14 +1,14 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { AiOutlineBell } from 'react-icons/ai';
+import Image from "next/image";
+import Link from "next/link";
+import { AiOutlineBell } from "react-icons/ai";
 import { GrLocation } from "react-icons/gr";
-import { BsCalendar2DateFill } from 'react-icons/bs'
-import { AiFillHome } from 'react-icons/ai'
-import { BiHomeAlt2 } from 'react-icons/bi'
+import { BsCalendar2DateFill } from "react-icons/bs";
+import { AiFillHome } from "react-icons/ai";
+import { BiHomeAlt2 } from "react-icons/bi";
 import { GrInstagram } from "react-icons/gr";
-import { FaYoutube } from 'react-icons/fa'
-import { FaFacebook } from 'react-icons/fa'
-import { BsTelegram } from 'react-icons/bs'
+import { FaYoutube } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { BsTelegram } from "react-icons/bs";
 
 export default function Home() {
   return (
@@ -48,12 +48,12 @@ export default function Home() {
         </div>
       </div>
       <div className="">
-        <h1 className="bg-cfcblue-400 font-bold text-2xl p-3 text-white rounded-tl-lg rounded-br-lg text-center drop-shadow-md">
+        <h1 className="bg-primary font-bold text-2xl p-3 text-white text-center drop-shadow-md">
           Speakers
         </h1>
       </div>
       <div className="">
-        <div className="flex justify-center space-x-4 mt-5">
+        <div className="grid grid-cols-2 gap-5 p-6 mt-5">
           <div className="">
             <Image
               src="/REVadah.jpg"
@@ -63,7 +63,7 @@ export default function Home() {
               className="drop-shadow-md rounded-md"
             />
             <h1 className="font-bold text-gray-700 mt-4">Rev Arome Adah</h1>
-            <p className='text-gray-600'>Savanah Grace Ministries</p>
+            <p className="text-gray-600">Savanah Grace Ministries</p>
           </div>
           <div>
             <Image
@@ -74,10 +74,8 @@ export default function Home() {
               className="drop-shadow-md rounded-md"
             />
             <h1 className="font-bold text-gray-700 mt-4">Bishop John Ibenu</h1>
-            <p className='text-gray-600'>Chapel of Freedom Intl.</p>
+            <p className="text-gray-600">Chapel of Freedom Intl.</p>
           </div>
-        </div>
-        <div className="flex justify-center space-x-4 mt-5">
           <div className="">
             <Image
               src="/DUnkaa.jpg"
@@ -87,7 +85,7 @@ export default function Home() {
               className="drop-shadow-lg rounded-md"
             />
             <h1 className="font-bold text-gray-700 mt-4">Rev Dunka Gomwalk</h1>
-            <p className='text-gray-600'>
+            <p className="text-gray-600">
               Covenant Word Christian <br />
               Center
             </p>
@@ -101,10 +99,8 @@ export default function Home() {
               className="drop-shadow-md rounded-md"
             />
             <h1 className="font-bold text-gray-700 mt-4">Rev Arome Tokula</h1>
-            <p className='text-gray-600'>Christ Family Ministries (Host)</p>
+            <p className="text-gray-600">Christ Family Ministries (Host)</p>
           </div>
-        </div>
-        <div className="flex justify-center space-x-4 mt-5">
           <div className="">
             <Image
               src="/PastorFred.jpg"
@@ -128,10 +124,6 @@ export default function Home() {
             <p>Father's Delight Ministries</p>
           </div>
         </div>
-        <h2 className="text-xl flex justify-center mx-5 my-5 font-semibold text-gray-700">
-          Arome Tokula | Arome E Adah | Joshua Tende | Bishop John Ibenu | PB
-          Philips | Dunka Gomwalk | Frederick Sule
-        </h2>
       </div>
       <div className="bg-primary">
         <div className="items-center p-5">
@@ -180,7 +172,7 @@ export default function Home() {
       </div>
       <div>
         <div className="p-5">
-          <h1>Christ Family Ministries</h1>
+          <p className="text-[11px] text-center">Christ Family Ministries &copy;</p>
         </div>
       </div>
     </>
