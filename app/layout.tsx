@@ -26,7 +26,7 @@ export default function RootLayout({
         <Provider>
           <div className="w-full flex justify-center bg-[#FBFBFB]">
             {/* <Alert /> */}
-            <main className="w-full laptop:w-[550px] desktop:w-[600px] min-h-screen shadow bg-white text-gray-800">
+            <main className="w-full laptop:w-[550px] desktop:w-[600px] min-h-screen shadow bg-white text-gray-800 pb-20">
               {children}
             </main>
           </div>

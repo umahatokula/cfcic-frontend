@@ -44,11 +44,11 @@ body {
 }
 
 .form__input, .form__select {
-  @apply w-full rounded-xl h-[55px] border-2 bg-transparent px-4;
+  @apply w-full rounded-xl h-[55px] border-2 bg-white px-4;
 }
 
 .form__input_error, .form__select_error {
-  @apply w-full rounded-xl h-[55px] border border-red-600 bg-transparent px-4;
+  @apply w-full rounded-xl h-[55px] border border-red-600 bg-white px-4;
 }
 
 .form__btn__default {
