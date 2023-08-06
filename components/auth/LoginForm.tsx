@@ -42,8 +42,6 @@ function LoginForm() {
     });
 
   if(session?.user?.statusCode === 403) {
-    console.log("Error", session?.user?.message);
-    // toaster(session?.user?.message);
     toast.error(session?.user?.message);
   } else {
     router.push('/dashboard');

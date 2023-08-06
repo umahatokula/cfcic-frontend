@@ -1,15 +1,16 @@
 "use client";
 
-import React from 'react'
-import Button from '../forms/Button';
+import React from "react";
+import Button from "../forms/Button";
 import { useForm } from "react-hook-form";
-import { RegistrationFormInputs } from '@/types';
-import axios from 'axios';
+import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { redirect } from 'next/navigation';
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 const schema = yup.object({
+  name: yup.string().required("Full name is required"),
   email: yup.string().required("Email is required"),
   password: yup.string().required("Password is required"),
   passwordConfirmation: yup
@@ -21,39 +22,74 @@ const schema = yup.object({
 });
 
 function RegistrationForm() {
-  const [showPasswordField, setShowPasswordField] = React.useState(false);
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<RegistrationFormInputs>({
+  } = useForm<RegisterFormInputs>({
     resolver: yupResolver(schema),
   });
   const onSubmit = async (data: any, e: any) => {
-    console.log("data", data);
     try {
-      const res = await axios({
-        method: "post",
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/register`,
-        data: data,
-      });
+      // const res = await axios({
+      //   method: "post",
+      //   url: `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
+      //   data: data,
+      // });
 
-      const {
-        data: { access_token },
-      } = res;
+      // const {
+      //   data: { access_token },
+      // } = res;
 
-      redirect('/dashboard');
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
 
+      if (!res.ok) {
+        // This will activate the closest `error.js` Error Boundary
+        toast.error("Error signing up");
+        throw new Error("Failed to fetch data");
+      }
+
+      router.push('/login');
+      
     } catch (error) {
       console.log("error", error);
     }
-
-  }
+  };
 
   return (
     <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
-      <div className="">
+      <div className="mt-0">
+        <div className="">
+          <label>Full name</label>
+          <div
+            className={`${
+              errors.name ? "form__input_error" : "form__input"
+            } flex justify-between`}
+          >
+            <input
+              className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
+              type="text"
+              {...register("name", { required: true })}
+            />
+          </div>
+          <span className="text-red-600 text-sm">
+            {errors.name && <span>{errors.name?.message}</span>}
+          </span>
+        </div>
+      </div>
+      <div className="mt-6">
         <div className="">
           <label>Email</label>
           <div
@@ -122,4 +158,4 @@ function RegistrationForm() {
   );
 }
 
-export default RegistrationForm
+export default RegistrationForm;

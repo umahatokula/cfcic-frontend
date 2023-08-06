@@ -2,39 +2,50 @@
 
 import ProfileHeader from "@/components/ProfileHeader";
 import Button from "@/components/forms/Button";
-import { KidsDataInputs, NewKid, NewKidInputs } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { BsPlusCircle } from "react-icons/bs";
 import { AiOutlineMinusCircle } from "react-icons/ai";
+import { useAppStore } from "@/lib/store";
 
 function AddKidsPage() {
+
+  const { kidsDetails, setKidsDetails } = useAppStore();
+
   const {
     control,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<NewKidInputs>();
-  const [kids, setKids] = React.useState<NewKid[]>([]);
+  const [kids, setKids] = React.useState<SingleKidsDetail[]>([]);
 
-  const handleAddTask = ({ newKid }: NewKidInputs) => {
+  const handleAddKid = ({ newKid }: NewKidInputs) => {
     if (
-      newKid.name.trim() !== "" &&
+      newKid.first_name.trim() !== "" &&
       newKid.birthday &&
       newKid.allergies &&
       newKid.emergency_contact
     ) {
-      setKids([...kids, newKid]);
+      console.log('newKid', newKid)
+      // setKids([...kids, newKid]);
+      setKidsDetails([...kidsDetails, newKid])
       reset();
     }
   };
 
-  const handleRemoveTask = (index: number) => {
-    const updatedTasks = kids.filter((_, i) => i !== index);
-    setKids(updatedTasks);
+  const handleRemoveKid = (index: number) => {
+    const updatedKidDetails = kidsDetails.filter((_, i) => i !== index);
+    // setKids(updatedKidDetails);
+    setKidsDetails(updatedKidDetails)
   };
+
+  // const handleSubmitKids = () => {
+  //   console.log(kids)
+  //   setKidsDetails(kids)
+  // };
 
   return (
     <div>
@@ -43,15 +54,15 @@ function AddKidsPage() {
         showBackButton={true}
         heading="Register Your Kids"
         subHeading="Please tell us a little bit about your kids"
-        backUrl={'biodata'}
+        backUrl={"biodata"}
       />
 
       <div>
-        <form onSubmit={handleSubmit(handleAddTask)}>
+        <form onSubmit={handleSubmit(handleAddKid)}>
           {/* Name */}
           <div className="mt-4">
             <Controller
-              name="newKid.name"
+              name="newKid.first_name"
               control={control}
               defaultValue=""
               rules={{ required: "Name is required" }}
@@ -69,13 +80,7 @@ function AddKidsPage() {
                 </div>
               )}
             />
-            {errors["newKid.name"] && (
-              <p>
-                <span className="text-red-500 text-xs">
-                  {errors["newKid.name"].message}
-                </span>
-              </p>
-            )}
+            {errors["newKid.first_name"] && <p>This field is required</p>}
           </div>
           {/* Birthday */}
           <div className="mt-4">
@@ -98,13 +103,7 @@ function AddKidsPage() {
                 </div>
               )}
             />
-            {errors["newKid.birthday"] && (
-              <p>
-                <span className="text-red-500 text-xs">
-                  {errors["newKid.birthday"].message}
-                </span>
-              </p>
-            )}
+            {errors["newKid.birthday"] && <p>This field is required</p>}
           </div>
           {/* Allergies */}
           <div className="mt-4">
@@ -127,13 +126,7 @@ function AddKidsPage() {
                 </div>
               )}
             />
-            {errors["newKid.allergies"] && (
-              <p>
-                <span className="text-red-500 text-xs">
-                  {errors["newKid.allergies"].message}
-                </span>
-              </p>
-            )}
+            {errors["newKid.allergies"] && <p>This field is required</p>}
           </div>
           {/* Emergency Contact */}
           <div className="mt-4">
@@ -156,13 +149,7 @@ function AddKidsPage() {
                 </div>
               )}
             />
-            {errors["newKid.emergency_contact"] && (
-              <p>
-                <span className="text-red-500 text-xs">
-                  {errors["newKid.emergency_contact"].message}
-                </span>
-              </p>
-            )}
+            {errors["newKid.emergency_contact"] && <p>This field is required</p>}
           </div>
           <button className="flex justify-end mt-8" type="submit">
             <div className="flex space-x-2 font-semibold text-accent items-center">
@@ -176,17 +163,19 @@ function AddKidsPage() {
         </form>
 
         <ul>
-          {kids.map((kid, index) => (
-            <div className="mt-8">
-              <li key={index}>
-                <span>{kid.name}</span>
+          {kidsDetails.map((kid, index) => (
+            <div className="mt-8" key={index}>
+              <li>
+                <span>{kid.first_name}</span>
                 <br />
                 Birthday: {kid.birthday}
                 <br />
                 Allergies: {kid.allergies}
+                <br />
+                Emergency Contact: {kid.emergency_contact}
               </li>
               <button
-                onClick={() => handleRemoveTask(index)}
+                onClick={() => handleRemoveKid(index)}
                 className="flex justify-end mt-2"
                 type="submit"
               >
@@ -206,10 +195,17 @@ function AddKidsPage() {
       </div>
 
       <div className="mt-20 gap-y-6 grid">
-        <Link className="link__btn__default block" href={"/profile/center-details"}>
+        <button
+          // onClick={handleSubmitKids}
+          type="button"
+          className="link__btn__default block"
+        >
           Next
-        </Link>
-        <Link className="link__btn__outline-primary block" href={"/profile/financial-commitments"}>
+        </button>
+        <Link
+          className="link__btn__outline-primary block"
+          href={"/profile/financial-commitments"}
+        >
           Skip for Now
         </Link>
       </div>

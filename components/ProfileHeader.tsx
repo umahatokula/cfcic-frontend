@@ -28,8 +28,9 @@ function ProfileHeader(props: ProfileHeaderProps) {
         <p className="text-center text-[25px] leading-[30px] font-normal mb-4">Set Up Your Profile</p>
       </div>
       <div className="w-full flex items-center">
-        {steps.map((val) => (
+        {steps.map((val, idx) => (
           <div
+          key={idx}
             className={`${style.line} ${
               val <= activeStep
                 ? "bg-gray-800 h-[3px] "

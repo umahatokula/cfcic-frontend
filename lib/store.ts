@@ -5,14 +5,16 @@ import { createCenterDetailsSlice } from './slices/createCenterDetailsSlice'
 import { createKidsDetailsSlice } from './slices/createKidsDetailsSlice'
 import { createFinancialCommitmentsSlice } from './slices/createFinancialCommitmentsSlice'
 import { createAlertSlice } from './slices/createAlertSlice'
+import { createEventRegistrationSlice } from './slices/createEventRegistrationSlice'
 
-export const useAppStore = create()(persist(
+export const useAppStore = create<AppStoreState>()(persist(
     (...a) => ({
     ...createBiodataSlice(...a),
     ...createCenterDetailsSlice(...a),
     ...createKidsDetailsSlice(...a),
     ...createFinancialCommitmentsSlice(...a),
     ...createAlertSlice(...a),
+    ...createEventRegistrationSlice(...a),
     }),
     {
         name: 'app-storage',

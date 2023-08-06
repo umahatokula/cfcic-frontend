@@ -10,9 +10,10 @@ declare module "next-auth" {
       address: string;
       zip: string;
       role: string;
-      accessToken: string;
+      access_token: string;
       statusCode?: number;
       message?: string;
+      user: User;
     };
   }
 }
