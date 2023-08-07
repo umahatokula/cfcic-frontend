@@ -22,7 +22,7 @@ function FinancialCommitmentsPage() {
         subHeading="Tell us a bit about yourself so we can serve you better."
         backUrl={"profile/center-details"}
       />
-      {financialCommitments.isPartner !== "1" ? <FormOne /> : <FormTwo />}
+      {financialCommitments.is_partner !== "1" ? <FormOne /> : <FormTwo />}
     </div>
   );
 }

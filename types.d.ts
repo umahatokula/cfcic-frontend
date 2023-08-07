@@ -8,6 +8,18 @@ interface RegisterFormInputs extends LoginFormInputs {
   passwordConfirmation: string;
 }
 
+interface DashboardCard {
+  link: string;
+  img: string;
+  heading: string;
+  body: string;
+}
+
+interface InfoCardProps {
+  iconUrl: string;
+  content: string;
+}
+
 interface BiodataCompulsoryFields {
   is_church_member: string;
   phone_number: string;

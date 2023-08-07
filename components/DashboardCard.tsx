@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { DashboardCard } from "@/types";
 
 const DashboardCard = (props: DashboardCard) => {
   const{img, body, link, heading} = props;
