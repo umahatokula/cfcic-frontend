@@ -4,7 +4,6 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { PiEyeLight, PiEyeSlashLight } from "react-icons/pi";
-import { LoginFormInputs } from "@/types";
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { redirect } from "next/navigation";
@@ -42,7 +41,7 @@ function LoginForm() {
     });
 
   if(session?.user?.statusCode === 403) {
-    toast.error(session?.user?.message);
+    toast.error(session?.user?.message || 'Error loggin in');
   } else {
     router.push('/dashboard');
   }

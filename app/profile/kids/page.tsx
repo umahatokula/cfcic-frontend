@@ -80,7 +80,7 @@ function AddKidsPage() {
                 </div>
               )}
             />
-            {errors["newKid.first_name"] && <p>This field is required</p>}
+            {/* {errors["newKid.first_name"] && <p>This field is required</p>} */}
           </div>
           {/* Birthday */}
           <div className="mt-4">
@@ -103,7 +103,7 @@ function AddKidsPage() {
                 </div>
               )}
             />
-            {errors["newKid.birthday"] && <p>This field is required</p>}
+            {/* {errors["newKid.birthday"] && <p>This field is required</p>} */}
           </div>
           {/* Allergies */}
           <div className="mt-4">
@@ -126,7 +126,7 @@ function AddKidsPage() {
                 </div>
               )}
             />
-            {errors["newKid.allergies"] && <p>This field is required</p>}
+            {/* {errors["newKid.allergies"] && <p>This field is required</p>} */}
           </div>
           {/* Emergency Contact */}
           <div className="mt-4">
@@ -149,7 +149,7 @@ function AddKidsPage() {
                 </div>
               )}
             />
-            {errors["newKid.emergency_contact"] && <p>This field is required</p>}
+            {/* {errors["newKid.emergency_contact"] && <p>This field is required</p>} */}
           </div>
           <button className="flex justify-end mt-8" type="submit">
             <div className="flex space-x-2 font-semibold text-accent items-center">
