@@ -141,7 +141,8 @@ type AppStoreState = BiodataSlice &
   CenterDetailsSlice &
   FinancialCommitmentsSlice &
   EventReistrationSlice &
-  AlertState;
+  AlertState &
+  UserSlice;
 
 interface FinancialCommitmentsError {
   isTither: string;
@@ -237,8 +238,27 @@ interface EventProps {
 }
 
 interface User {
-  name: string;
   id: string;
   email: string;
-  display_picture: string;
+  name?: string;
+  display_picture?: string;
+  provider?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+interface SessionObject {
+  user: {
+    access_token: string;
+    user: User;
+    iat: number;
+    exp: number;
+    jti: string;
+  };
+  expires: string;
+}
+interface UserSlice {
+  user: User;
+  access_token: string;
+  addUser: (obj: User, access_token: string) => void;
+  resetUser: () => void;
 }

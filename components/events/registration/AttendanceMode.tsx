@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
   const { data: session } = useSession();
 
-  const { registration, setRegistration } = useAppStore();
+  const { access_token, user, registration, setRegistration } = useAppStore();
 
   const router = useRouter();
 
@@ -24,7 +24,7 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
     const validatedData = {
       ...data,
       event_id: event.id,
-      user_id: session?.user?.user?.id,
+      user_id: user?.id,
       in_person: data.in_person == "1" ? true : false,
       requires_accomodation: data.requires_accomodation == "1" ? true : false,
       requires_feeding: data.requires_feeding == "1" ? true : false,
@@ -38,7 +38,7 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
       }),
       headers: {
         "content-type": "application/json",
-        Authorization: "Bearer " + session?.user?.access_token,
+        Authorization: "Bearer " + access_token,
       },
     })
       .then((res) => console.log(res))
@@ -49,7 +49,7 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
     setRegistration({
       ...registration,
       event_id: event?.id,
-      user_id: session?.user?.user?.id!,
+      user_id: user?.id!,
       in_person: "1",
     });
   };
@@ -58,7 +58,7 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
     setRegistration({
       ...registration,
       event_id: event?.id,
-      user_id: session?.user?.user?.id!,
+      user_id: user?.id!,
       in_person: "0",
     });
 
@@ -67,7 +67,9 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
 
   return (
     <>
-      <pre>{JSON.stringify(session?.user?.access_token, null, 2)}</pre>
+      <pre>USER ID: {JSON.stringify(user?.id, null, 2)}</pre>
+      <pre>ACCESS TOKEN: {JSON.stringify(access_token, null, 2)}</pre>
+      <pre>EVENT ID: {JSON.stringify(event?.id, null, 2)}</pre>
       <p className="text-center mt-4 text-base font-normal">
         How would you be attending?
       </p>

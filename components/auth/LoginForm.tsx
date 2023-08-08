@@ -22,7 +22,7 @@ function LoginForm() {
   const [showPasswordField, setShowPasswordField] = React.useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
-  
+
   const {
     register,
     handleSubmit,
@@ -31,6 +31,7 @@ function LoginForm() {
   } = useForm<LoginFormInputs>({
     resolver: yupResolver(schema),
   });
+
   const onSubmit = async (data: any, e: any) => {
     e.preventDefault();
 
@@ -40,13 +41,12 @@ function LoginForm() {
       callbackUrl: "/dashboard",
     });
 
-  if(session?.user?.statusCode === 403) {
-    toast.error(session?.user?.message || 'Error loggin in');
-  } else {
-    router.push('/dashboard');
-  }
-
-  }
+    if (session?.user?.statusCode === 403) {
+      toast.error(session?.user?.message || "Error loggin in");
+    } else {
+      router.push("/dashboard");
+    }
+  };
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */

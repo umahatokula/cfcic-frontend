@@ -1,15 +1,29 @@
 "use client";
 
-import DashboardCard from '@/components/DashboardCard';
-import RegistrationPageDivider from '@/components/events/registration/RegistrationPageDivider';
-import { useSession } from 'next-auth/react';
-import React from 'react'
+import DashboardCard from "@/components/DashboardCard";
+import RegistrationPageDivider from "@/components/events/registration/RegistrationPageDivider";
+import { useAppStore } from "@/lib/store";
+import { useSession } from "next-auth/react";
+import React, { useEffect } from "react";
 
 function DashboardPage() {
   const { data: session, status } = useSession();
+  const { addUser } = useAppStore();
+
+  useEffect(() => {
+    if (!session) return;
+
+    const { user: sessionData } = session as any;
+
+    const user = sessionData?.user;
+    const access_token = sessionData?.access_token as any;
+
+    addUser(user, access_token);
+  }, [session]);
+
   return (
     <>
-      <pre>{JSON.stringify(session, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
       <RegistrationPageDivider />
       <p className="text-base font-medium text-center mb-10 mt-3">Dashboard</p>
       <div className="w-full grid grid-cols-2 gap-5 mt-5">
@@ -102,4 +116,4 @@ function DashboardPage() {
   );
 }
 
-export default DashboardPage
+export default DashboardPage;
