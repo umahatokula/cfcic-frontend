@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
   const { data: session } = useSession();
 
-  const { access_token, user, registration, setRegistration } = useAppStore();
+  const { access_token, user, registration, setRegistration, resetEvent } = useAppStore();
 
   const router = useRouter();
 
@@ -35,7 +35,7 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/attendance`, {
       method: "POST",
       body: JSON.stringify({
-        validatedData,
+        ...validatedData,
       }),
       headers: {
         "content-type": "application/json",
@@ -64,13 +64,13 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
     });
 
     registerForEvent(registration);
+    resetEvent()
+
+    router.push(`/events/register/${event?.id}/success`);
   };
 
   return (
     <>
-      <pre>USER ID: {JSON.stringify(user?.id, null, 2)}</pre>
-      <pre>ACCESS TOKEN: {JSON.stringify(access_token, null, 2)}</pre>
-      <pre>EVENT ID: {JSON.stringify(event?.id, null, 2)}</pre>
       <p className="text-center mt-4 text-base font-normal">
         How would you be attending?
       </p>

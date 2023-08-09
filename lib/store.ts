@@ -7,6 +7,7 @@ import { createFinancialCommitmentsSlice } from './slices/createFinancialCommitm
 import { createAlertSlice } from './slices/createAlertSlice'
 import { createEventRegistrationSlice } from './slices/createEventRegistrationSlice'
 import { createUserSlice } from './slices/createUserSlice'
+import { createCurrentEventSlice } from './slices/createCurrentEventSlice'
 
 export const useAppStore = create<AppStoreState>()(persist(
     (...a) => ({
@@ -17,6 +18,7 @@ export const useAppStore = create<AppStoreState>()(persist(
     ...createAlertSlice(...a),
     ...createEventRegistrationSlice(...a),
     ...createUserSlice(...a),
+    ...createCurrentEventSlice(...a),
     }),
     {
         name: 'app-storage',

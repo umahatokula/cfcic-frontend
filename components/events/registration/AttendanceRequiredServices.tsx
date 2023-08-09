@@ -8,11 +8,12 @@ import { useForm } from "react-hook-form";
 function AttendanceRequiredServices({ event, isRegistrationOpen }: EventProps) {
   const { data: session } = useSession();
 
-  const { registration, setRegistration } = useAppStore();
+  const { access_token, registration, setRegistration, resetEvent } =
+    useAppStore();
 
   const router = useRouter();
 
-  async function registerForEvent(data: any) {
+  function formatEventRegistrationData(data: any) {
     const validatedData = {
       ...data,
       event_id: event.id,
@@ -23,14 +24,39 @@ function AttendanceRequiredServices({ event, isRegistrationOpen }: EventProps) {
       requires_transport: data.requires_transport == "1" ? true : false,
     };
 
+    return validatedData;
+  }
+
+  // Event registration
+  async function registerForEvent(data: any) {
+    const validatedData = formatEventRegistrationData(data);
+
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/attendance`, {
       method: "POST",
       body: JSON.stringify({
-        validatedData,
+        ...validatedData,
       }),
       headers: {
         "content-type": "application/json",
         Authorization: "Bearer " + session?.user?.access_token,
+      },
+    })
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
+  }
+
+  // Update event registration
+  async function updateEventRegistration(data: any) {
+    const validatedData = formatEventRegistrationData(data);
+
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/attendance/${event?.id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        ...validatedData,
+      }),
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + access_token,
       },
     })
       .then((res) => console.log(res))
@@ -51,15 +77,18 @@ function AttendanceRequiredServices({ event, isRegistrationOpen }: EventProps) {
     setRegistration({ ...data, event_id: event?.id });
 
     registerForEvent(registration);
+    resetEvent();
+
+    router.push(`/events/register/${event?.id}/success`);
   };
 
   return (
     <>
-      <form className="w-full mt-20" onSubmit={handleSubmit(onSubmit)}>
+      <form className="w-full mt-12" onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-6">
           <div className="">
             <label>Do you require feeding?</label>
-            <div className="form__input flex justify-between">
+            <div className="form__input flex justify-between mt-2">
               <select
                 className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
                 {...register("requires_feeding", { required: true })}
@@ -77,7 +106,7 @@ function AttendanceRequiredServices({ event, isRegistrationOpen }: EventProps) {
 
           <div className="">
             <label>Do you require accomodation?</label>
-            <div className="form__input flex justify-between">
+            <div className="form__input flex justify-between mt-2">
               <select
                 className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
                 {...register("requires_accomodation", { required: true })}
@@ -95,7 +124,7 @@ function AttendanceRequiredServices({ event, isRegistrationOpen }: EventProps) {
 
           <div className="">
             <label>Do you require transportation?</label>
-            <div className="form__input flex justify-between">
+            <div className="form__input flex justify-between mt-2">
               <select
                 className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
                 {...register("requires_transport", { required: true })}
