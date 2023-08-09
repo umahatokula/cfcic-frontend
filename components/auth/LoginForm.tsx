@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { PiEyeLight, PiEyeSlashLight } from "react-icons/pi";
@@ -38,15 +38,21 @@ function LoginForm() {
     const result = await signIn("credentials", {
       ...data,
       redirect: false,
-      callbackUrl: "/dashboard",
     });
+    console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ result:", result)
+    console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ session:", session)
+    console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ status:", status)
 
-    if (session?.user?.statusCode === 403) {
-      toast.error(session?.user?.message || "Error loggin in");
+    if (result?.error === "AccessDenied") {
+      toast.error(session?.user?.message || "Credentials do not match");
     } else {
       router.push("/dashboard");
     }
   };
+
+  useEffect(() => {
+    console.log('status', status)
+  }, [status])
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */

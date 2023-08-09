@@ -5,6 +5,7 @@ import AttendanceMode from "@/components/events/registration/AttendanceMode";
 import AttendanceRequiredServices from "@/components/events/registration/AttendanceRequiredServices";
 import InfoCard from "@/components/events/registration/InfoCard";
 import RegistrationPageDivider from "@/components/events/registration/RegistrationPageDivider";
+import { useIsMounted } from "@/hooks/useIsMounted";
 import { useAppStore } from "@/lib/store";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -13,6 +14,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 function page() {
+  const isMounted = useIsMounted();
   const { id } = useParams();
   const [event, setEvent] = useState<Event>();
   const { registration } = useAppStore();
@@ -24,6 +26,8 @@ function page() {
     };
     init();
   }, []);
+
+  if(!isMounted) return;
 
   return (
     <div>

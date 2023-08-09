@@ -8,7 +8,43 @@ import { useForm } from "react-hook-form";
 function FormTwo() {
   const router = useRouter();
 
-  const { financialCommitments, setFinancialCommitments } = useAppStore();
+  const {
+    access_token,
+    biodata,
+    centerDetails,
+    financialCommitments,
+    kidsDetails,
+    setBiodata,
+    setFinancialCommitments,
+  } = useAppStore();
+
+  async function saveProfile(data: any) {
+    const validatedData = {
+      ...data,
+      is_church_member: data.is_church_member == "1" ? true : false,
+      growth_track_completed: data.growth_track_completed == "1" ? true : false,
+      is_tither: data.is_tither == "1" ? true : false,
+      is_partner: data.is_partner == "1" ? true : false,
+      dependents: [...kidsDetails],
+    };
+    console.log(
+      "🚀 ~ file: FormOne.tsx:14 ~ saveProfile ~ validatedData:",
+      validatedData
+    );
+
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/create`, {
+      method: "POST",
+      body: JSON.stringify({
+        validatedData,
+      }),
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + access_token,
+      },
+    })
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
+  }
 
   const {
     register,
@@ -18,12 +54,26 @@ function FormTwo() {
   } = useForm<FinancialCommitments>({
     defaultValues: { ...financialCommitments },
   });
+
   const onSubmit = (data: any) => {
     console.log(data);
     const finData = { ...data };
     setFinancialCommitments(finData);
+
+    // console.log(data);
+    setBiodata(data);
+    const onboardingData = {
+      ...biodata,
+      ...centerDetails,
+      ...financialCommitments,
+      ...kidsDetails,
+    };
+
+    saveProfile(onboardingData);
+
     // router.push("/profile/financial-commitments");
   };
+
   return (
     <>
       <form className="w-full mt-20" onSubmit={handleSubmit(onSubmit)}>

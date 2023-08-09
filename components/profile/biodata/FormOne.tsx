@@ -6,6 +6,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 function FormOne() {
+  const { access_token, user, registration, setRegistration } = useAppStore();
+
   const {
     biodata,
     centerDetails,
@@ -26,23 +28,13 @@ function FormOne() {
   const onSubmit = (data: any) => {
     // console.log(data);
     setBiodata(data);
-    const onboardingData = {
-      ...biodata,
-      ...centerDetails,
-      ...financialCommitments,
-      ...kidsDetails,
-    };
-    console.log(
-      "🚀 ~ file: FormOne.tsx:30 ~ onSubmit ~ onboardingData:",
-      onboardingData
-    );
 
-    // const haveKidsDetails = data.haveKidsDetails == "on" ? true : false;
-    // if (haveKidsDetails) {
-    //   router.push("/profile/kids");
-    // } else {
-    //   router.push("/profile/center-details");
-    // }
+    const haveKidsDetails = data.haveKidsDetails == "on" ? true : false;
+    if (haveKidsDetails) {
+      router.push("/profile/kids");
+    } else {
+      router.push("/profile/center-details");
+    }
   };
 
   return (
