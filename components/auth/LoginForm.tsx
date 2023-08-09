@@ -39,9 +39,9 @@ function LoginForm() {
       ...data,
       redirect: false,
     });
-    console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ result:", result)
-    console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ session:", session)
-    console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ status:", status)
+    console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ result:", result);
+    console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ session:", session);
+    console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ status:", status);
 
     if (result?.error === "AccessDenied") {
       toast.error(session?.user?.message || "Credentials do not match");
@@ -51,8 +51,8 @@ function LoginForm() {
   };
 
   useEffect(() => {
-    console.log('status', status)
-  }, [status])
+    console.log("status", status);
+  }, [status]);
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */

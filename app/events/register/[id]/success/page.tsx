@@ -12,7 +12,7 @@ function SuccessPage() {
       </p>
 
       <p className="text-base mb-6">
-        Events \ \ <span className="font-semibold">Registration</span>
+        Events \ <span className="font-semibold">Registration</span>
       </p>
 
       <div className="rounded-tr-xl rounded-bl-xl rounded-tl-sm rounded-br-sm w-full min-h-[240px] bg-[#0077B6] text-[#FBFDFF] px-5 py-12">

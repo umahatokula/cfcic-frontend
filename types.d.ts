@@ -142,7 +142,8 @@ type AppStoreState = BiodataSlice &
   FinancialCommitmentsSlice &
   EventReistrationSlice &
   AlertState &
-  UserSlice;
+  UserSlice &
+  EventSlice;
 
 interface FinancialCommitmentsError {
   isTither: string;
@@ -235,6 +236,11 @@ interface Event {
 interface EventProps {
   event: Event;
   isRegistrationOpen?: boolean;
+}
+interface EventSlice {
+  currentEvent: any;
+  addEvent: (obj: Event) => void;
+  resetEvent: () => void;
 }
 
 interface User {

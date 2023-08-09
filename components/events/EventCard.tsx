@@ -1,9 +1,21 @@
+"use client";
+
+import { useAppStore } from "@/lib/store";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 function EventCard({ event, isRegistrationOpen }: EventProps) {
   const { id, name, tagline, banner_image, start_date }: Event = event;
+  const router = useRouter();
+  const { currentEvent, addEvent } = useAppStore();
+
+  function handleOnClick() {
+    addEvent(event);
+    router.push(`/events/register/${id}`);
+  }
+
   return (
     <div className="w-full">
       <p className="text-xs font-normal text-[#565757] mb-3">{start_date}</p>
@@ -20,11 +32,19 @@ function EventCard({ event, isRegistrationOpen }: EventProps) {
       <p className="text-center text-xs font-normal text-[#565757] mb-3">
         {tagline}
       </p>
-      {isRegistrationOpen ? <Link className="link__btn__default" href={`/events/register/${id}`}>
-        Register Now
-      </Link> : <Link className="link__btn__outline-primary" href={`#`}>
-        Learn More
-      </Link>}
+      {isRegistrationOpen ? (
+        <button
+          onClick={handleOnClick}
+          type="button"
+          className="link__btn__default"
+        >
+          Register Now
+        </button>
+      ) : (
+        <Link className="link__btn__outline-primary" href={`#`}>
+          Learn More
+        </Link>
+      )}
     </div>
   );
 }
