@@ -11,15 +11,15 @@ function NavBar() {
   const { resetUser } = useAppStore();
 
   return (
-    <div className="flex justify-between items-start px-4 py-5 bg-primary w-full text-[#CAF0F8]">
-      <BiFoodMenu className="w-5 h-5 stroke-0 cursor-pointer" />
+    <div className="flex justify-between items-start px-6 py-7 bg-primary w-full text-[#CAF0F8]">
+      <BiFoodMenu className="w-7 h-7 stroke-0 cursor-pointer" />
       <div className="flex space-x-3">
-        <FaRegBell className="w-5 h-5 stroke-1 cursor-pointer" />
+        <FaRegBell className="w-7 h-7 stroke-1 cursor-pointer" />
         <button onClick={() => {
           resetUser()
           signOut()
         }}>
-          <FaRegBell className="w-5 h-5 stroke-1 cursor-pointer" />
+          <FaRegBell className="w-7 h-7 stroke-1 cursor-pointer" />
         </button>
       </div>
     </div>

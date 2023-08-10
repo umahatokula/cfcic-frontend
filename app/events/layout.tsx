@@ -8,7 +8,7 @@ export default function layout({
   return (
     <div className="">
       <NavBar />
-      <div className="p-6">{children}</div>
+      <div className="p-6 overflow-hidden">{children}</div>
     </div>
   );
 }
