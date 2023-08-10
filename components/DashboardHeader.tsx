@@ -16,7 +16,7 @@ const NavBar = () => {
               width={100}
               className="w-32"
             />
-            <AiOutlineBell className="h-6 w-6 text-[#CAF0F8]" />
+            <AiOutlineBell className="h-7 w-7 text-[#CAF0F8]" />
           </div>
           <div className="flex justify-between items-center mt-6">
             <p className="text-white text-[20px] leading-[30px] font-semibold">

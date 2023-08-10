@@ -75,13 +75,13 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
         How would you be attending?
       </p>
 
-      <form className="w-full mt-10" onSubmit={handleSubmit(onSubmitPhysical)}>
+      <form className="w-full mt-5" onSubmit={handleSubmit(onSubmitPhysical)}>
         <button type="submit" className="form__btn__default mt-10">
           Physically
         </button>
       </form>
 
-      <form className="w-full mt-10" onSubmit={handleSubmit(onSubmitOnline)}>
+      <form className="w-full mt-5" onSubmit={handleSubmit(onSubmitOnline)}>
         <button type="submit" className="link__btn__outline-primary mt-8">
           Online
         </button>

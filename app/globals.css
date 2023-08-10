@@ -44,7 +44,7 @@ body {
 }
 
 .form__input, .form__select {
-  @apply w-full rounded-xl h-[55px] border-2 bg-white px-4;
+  @apply w-full rounded-xl h-[55px] border-2 bg-white;
 }
 
 .form__input_error, .form__select_error {
@@ -53,6 +53,10 @@ body {
 
 .form__btn__default {
   @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-5 bg-accent text-white border-[#77858C];
+}
+
+input, select {
+  @apply px-4;
 }
 
 .form__btn__default {
