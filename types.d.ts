@@ -1,3 +1,5 @@
+import { Dependent } from "./types";
+
 interface LoginFormInputs {
   email: string;
   password: string;
@@ -41,6 +43,7 @@ interface BiodataSlice {
   biodata: Biodata;
   setBiodata: (obj: Biodata) => void;
   addNewKid: () => void;
+  resetBiodata: () => void;
 }
 
 interface SingleKidsDetail {
@@ -58,6 +61,7 @@ interface NewKidInputs {
 interface KidsDetailsSlice {
   kidsDetails: SingleKidsDetail[];
   setKidsDetails: (arr: SingleKidsDetail[]) => void;
+  resetKidsDetails: () => void;
 }
 
 interface CenterDetails {
@@ -73,6 +77,7 @@ interface CenterDetails {
 interface CenterDetailsSlice {
   centerDetails: CenterDetails;
   setCenterDetails: (obj: CenterDetails) => void;
+  resetCenterDetails: () => void;
 }
 
 interface CenterDetailsError {
@@ -98,6 +103,7 @@ interface FinancialCommitments extends FinancialCommitmentsHalf {
 interface FinancialCommitmentsSlice {
   financialCommitments: FinancialCommitments;
   setFinancialCommitments: (obj: FinancialCommitments) => void;
+  resetFinancialCommitments: () => void;
 }
 
 interface AlertObj {
@@ -131,9 +137,17 @@ interface EventRegistrationAllRequirements extends EventRegistrationServices {
   new_dependents?: string[];
 }
 
+interface EventRegistrationAPIFormat extends EventRegistrationAllRequirements {
+  requires_feeding: boolean;
+  requires_accomodation: boolean;
+  requires_transport: boolean;
+  in_person: boolean;
+}
+
 interface EventReistrationSlice {
   registration: EventRegistrationAllRequirements;
   setRegistration: (obj: EventRegistrationAllRequirements) => void;
+  resetRegistration: () => void;
 }
 
 type AppStoreState = BiodataSlice &
@@ -267,4 +281,25 @@ interface UserSlice {
   access_token: string;
   addUser: (obj: User, access_token: string) => void;
   resetUser: () => void;
+}
+
+interface ProfileAPIFormat {
+  phone_number: string;
+  occupation: string;
+  birthday: string;
+  marital_status: string;
+  marriage_anniversary: string;
+  is_church_member: true;
+  church_join_date: string;
+  growth_track_completed: true;
+  is_tither: true;
+  is_partner: true;
+  payment_interval: string;
+  church_centre_id: number;
+  home_cell_id: number;
+  colony_id: number;
+  dependents: Dependent[];
+  roles_and_responsibilities: string[];
+  service_team: string[];
+  partnered_arms: string[];
 }

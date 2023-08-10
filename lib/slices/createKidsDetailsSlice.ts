@@ -1,8 +1,13 @@
-import { StateCreator } from "zustand"
+import { StateCreator } from "zustand";
 
-export const createKidsDetailsSlice: StateCreator<KidsDetailsSlice> = (set) => ({
-    kidsDetails: [],
-    setKidsDetails: (arr) => set(
-        { kidsDetails: arr }
-    )
-})
+const initialState = {
+  kidsDetails: [],
+};
+
+export const createKidsDetailsSlice: StateCreator<KidsDetailsSlice> = (
+  set
+) => ({
+  ...initialState,
+  setKidsDetails: (arr) => set({ kidsDetails: arr }),
+  resetKidsDetails: () => set(() => ({ ...initialState })),
+});

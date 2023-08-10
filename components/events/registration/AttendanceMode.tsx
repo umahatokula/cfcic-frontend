@@ -1,3 +1,7 @@
+import {
+  formatEventRegistrationData,
+  registerForEvent,
+} from "@/app/utils/events";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useAppStore } from "@/lib/store";
 import { useSession } from "next-auth/react";
@@ -6,9 +10,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
-  const { data: session } = useSession();
-
-  const { access_token, user, registration, setRegistration, resetEvent } = useAppStore();
+  const { access_token, user, registration, setRegistration, resetEvent, resetRegistration } =
+    useAppStore();
 
   const router = useRouter();
 
@@ -21,31 +24,6 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
     defaultValues: { ...registration },
   });
 
-  async function registerForEvent(data: any) {
-    const validatedData = {
-      ...data,
-      event_id: event.id,
-      user_id: user?.id,
-      in_person: data.in_person == "1" ? true : false,
-      requires_accomodation: data.requires_accomodation == "1" ? true : false,
-      requires_feeding: data.requires_feeding == "1" ? true : false,
-      requires_transport: data.requires_transport == "1" ? true : false,
-    };
-
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/attendance`, {
-      method: "POST",
-      body: JSON.stringify({
-        ...validatedData,
-      }),
-      headers: {
-        "content-type": "application/json",
-        Authorization: "Bearer " + access_token,
-      },
-    })
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
-  }
-
   const onSubmitPhysical = (data: any) => {
     setRegistration({
       ...registration,
@@ -55,7 +33,7 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
     });
   };
 
-  const onSubmitOnline = (data: any) => {
+  const onSubmitOnline = async (data: any) => {
     setRegistration({
       ...registration,
       event_id: event?.id,
@@ -63,8 +41,15 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
       in_person: "0",
     });
 
-    registerForEvent(registration);
-    resetEvent()
+    const validatedData = formatEventRegistrationData(
+      registration,
+      event?.id,
+      user?.id
+    );
+
+    const reg = await registerForEvent(validatedData, access_token);
+    resetRegistration();
+    resetEvent();
 
     router.push(`/events/register/${event?.id}/success`);
   };

@@ -9,9 +9,12 @@ import { Controller, useForm } from "react-hook-form";
 import { BsPlusCircle } from "react-icons/bs";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { useAppStore } from "@/lib/store";
+import { useIsMounted } from "@/hooks/useIsMounted";
+import { useRouter } from "next/navigation";
 
 function AddKidsPage() {
-
+  const isMounted = useIsMounted();
+  const router = useRouter();
   const { kidsDetails, setKidsDetails } = useAppStore();
 
   const {
@@ -29,9 +32,9 @@ function AddKidsPage() {
       newKid.allergies &&
       newKid.emergency_contact
     ) {
-      console.log('newKid', newKid)
+      console.log("newKid", newKid);
       // setKids([...kids, newKid]);
-      setKidsDetails([...kidsDetails, newKid])
+      setKidsDetails([...kidsDetails, newKid]);
       reset();
     }
   };
@@ -39,13 +42,17 @@ function AddKidsPage() {
   const handleRemoveKid = (index: number) => {
     const updatedKidDetails = kidsDetails.filter((_, i) => i !== index);
     // setKids(updatedKidDetails);
-    setKidsDetails(updatedKidDetails)
+    setKidsDetails(updatedKidDetails);
   };
 
-  // const handleSubmitKids = () => {
-  //   console.log(kids)
-  //   setKidsDetails(kids)
-  // };
+  const handleSubmitKids = () => {
+    console.log(kids);
+    setKidsDetails(kidsDetails);
+
+    router.push("/profile/center-details");
+  };
+
+  if (!isMounted) return;
 
   return (
     <div>
@@ -54,7 +61,7 @@ function AddKidsPage() {
         showBackButton={true}
         heading="Register Your Kids"
         subHeading="Please tell us a little bit about your kids"
-        backUrl={"biodata"}
+        backUrl={"/profile/biodata"}
       />
 
       <div>
@@ -196,7 +203,7 @@ function AddKidsPage() {
 
       <div className="mt-20 gap-y-6 grid">
         <button
-          // onClick={handleSubmitKids}
+          onClick={handleSubmitKids}
           type="button"
           className="link__btn__default block"
         >
@@ -204,7 +211,7 @@ function AddKidsPage() {
         </button>
         <Link
           className="link__btn__outline-primary block"
-          href={"/profile/financial-commitments"}
+          href={"/profile/center-details"}
         >
           Skip for Now
         </Link>
