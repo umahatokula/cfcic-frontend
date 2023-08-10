@@ -1,14 +1,22 @@
-import Button from "@/components/forms/Button";
+import { createProfile, formatProfileData } from "@/app/utils/profile";
+import { useIsMounted } from "@/hooks/useIsMounted";
 import { useAppStore } from "@/lib/store";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 
 function FormOne() {
+  const isMounted = useIsMounted();
   const router = useRouter();
 
-  const { financialCommitments, setFinancialCommitments } = useAppStore();
+  const {
+    access_token,
+    financialCommitments,
+    setFinancialCommitments,
+    biodata,
+    centerDetails,
+    kidsDetails,
+  } = useAppStore();
 
   const {
     register,
@@ -19,10 +27,23 @@ function FormOne() {
     defaultValues: { ...financialCommitments },
   });
   const onSubmit = (data: any) => {
-    console.log(data);
+
     setFinancialCommitments(data);
-    // router.push("/profile/financial-commitments");
+    const onboardingData = {
+      ...biodata,
+      ...centerDetails,
+      ...financialCommitments,
+    };
+
+    const validatedData = formatProfileData({...onboardingData, dependents: kidsDetails});
+
+    createProfile(validatedData, access_token);
   };
+
+  const isPartnerBool = watch("is_partner");
+
+  if (!isMounted) return;
+
   return (
     <>
       <form className="w-full mt-20" onSubmit={handleSubmit(onSubmit)}>
@@ -65,19 +86,64 @@ function FormOne() {
               </span>
             )}
           </div>
+
+          {isPartnerBool === "1" && (
+            <>
+              {/* What Arm(s) do you Partner with? */}
+              <div className="">
+                <label>What Arm(s) do you Partner with?</label>
+                <div className="form__input flex justify-between">
+                  <select
+                    className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
+                    {...register("partnered_arms", { required: true })}
+                    multiple
+                  >
+                    <option value="1">
+                      Publications - Euphoria devotional, Higher life magazine
+                    </option>
+                    <option value="0">
+                      Programs & Ministry - Faith Adventures, Rev. Arome
+                      Tokula’s ministry trips
+                    </option>
+                    <option value="2">
+                      WOMOC - Wavelength broadcast, Livestream
+                    </option>
+                  </select>
+                </div>
+                {errors.partnered_arms && (
+                  <span className="text-red-500 text-xs">
+                    This field is required
+                  </span>
+                )}
+              </div>
+
+              {/* How often would you like to pay? */}
+              <div className="">
+                <label>How often would you like to pay?</label>
+                <div className="form__input flex justify-between">
+                  <select
+                    className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
+                    {...register("payment_interval", { required: true })}
+                  >
+                    <option value="1">Monthly</option>
+                    <option value="2">Bi-monthly</option>
+                    <option value="3">Quarterly</option>
+                  </select>
+                </div>
+                {errors.payment_interval && (
+                  <span className="text-red-500 text-xs">
+                    This field is required
+                  </span>
+                )}
+              </div>
+            </>
+          )}
         </div>
 
         <div className="mt-20 gap-y-6 grid">
-          <Button
-            bgColor="bg-accent"
-            textColor="text-white"
-            borderColor="border-[#77858C]"
-            type="submit"
-            btnText="Proceed"
-          />
-          <Link className="link__btn__outline-primary block" href={"/"}>
-            Skip for Now
-          </Link>
+          <button type="submit" className="form__btn__default">
+            Finish
+          </button>
         </div>
       </form>
     </>

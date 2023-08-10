@@ -167,16 +167,12 @@ function FormTwo() {
         </div>
 
         <div className="mt-20 gap-y-6 grid">
-          <Button
-            bgColor="bg-accent"
-            textColor="text-white"
-            borderColor="border-[#77858C]"
+          <button
             type="submit"
-            btnText="Proceed"
-          />
-          <Link className="link__btn__outline-primary block" href={"/"}>
-            Skip for Now
-          </Link>
+            className="form__btn__default"
+          >
+            Finish
+          </button>
         </div>
       </form>
     </>

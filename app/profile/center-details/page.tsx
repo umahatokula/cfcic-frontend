@@ -34,7 +34,7 @@ function CenterDetailPage() {
         showBackButton={true}
         heading="Church Details"
         subHeading="Tell us a bit about yourself so we can serve you better."
-        backUrl={"kids"}
+        backUrl={"/profile/kids"}
       />
       <form className="w-full mt-20" onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-6">

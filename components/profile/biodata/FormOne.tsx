@@ -121,10 +121,10 @@ function FormOne() {
                 className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
                 {...register("marital_status")}
               >
-                <option value="1">Single</option>
-                <option value="2">Married</option>
-                <option value="3">Separated</option>
-                <option value="4">Divorced</option>
+                <option value="single">Single</option>
+                <option value="married">Married</option>
+                <option value="separated">Separated</option>
+                <option value="divorced">Divorced</option>
               </select>
             </div>
             {errors.marital_status && (
