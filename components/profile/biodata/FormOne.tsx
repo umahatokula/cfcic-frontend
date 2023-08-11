@@ -4,6 +4,33 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup.object({
+  is_church_member: yup.string().required("Email is required"),
+  phone_number: yup
+    .string()
+    .max(13, "Phone number must be shorter than or equal to 13 characters")
+    .required("Phone number is required"),
+
+  // church_join_date: yup
+  //   .string()
+  //   .nullable()
+  //   .test(
+  //     "is-iso8601-date",
+  //     "Church join date must be a valid ISO 8601 date string",
+  //     (value) => {
+  //       if (!value) return true; // Allow null or undefined values
+  //       return yup.date().isValid(value);
+  //     }
+  //   ),
+
+  // payment_interval: yup
+  //   .string()
+  //   .min(5, "Payment interval must be longer than or equal to 5 characters")
+  //   .required("Payment interval is required"),
+});
 
 function FormOne() {
   const { access_token, user, registration, setRegistration } = useAppStore();
@@ -24,9 +51,10 @@ function FormOne() {
     formState: { errors },
   } = useForm<BiodataForm>({
     defaultValues: { ...biodata },
+    // resolver: yupResolver(schema),
   });
   const onSubmit = (data: any) => {
-    // console.log(data);
+    console.log(data);
     setBiodata(data);
 
     const haveKidsDetails = data.haveKidsDetails == "on" ? true : false;
@@ -207,13 +235,7 @@ function FormOne() {
         </div>
 
         <div className="mt-20">
-          <Button
-            bgColor="bg-accent"
-            textColor="text-white"
-            borderColor="border-[#77858C]"
-            type="submit"
-            btnText="Proceed"
-          />
+          <button type="submit" className="form__btn__default">Proceed</button>
         </div>
       </form>
     </>

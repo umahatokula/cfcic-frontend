@@ -2,15 +2,11 @@
 
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import Image from "next/image";
 import { PiEyeLight, PiEyeSlashLight } from "react-icons/pi";
-import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { redirect } from "next/navigation";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
-import { useAppStore } from "@/lib/store";
 import { toast } from "react-hot-toast";
 
 const schema = yup.object({
@@ -39,9 +35,9 @@ function LoginForm() {
       ...data,
       redirect: false,
     });
-    console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ result:", result);
-    console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ session:", session);
-    console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ status:", status);
+    // console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ result:", result);
+    // console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ session:", session);
+    // console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ status:", status);
 
     if (result?.error === "AccessDenied") {
       toast.error(session?.user?.message || "Credentials do not match");
@@ -51,7 +47,8 @@ function LoginForm() {
   };
 
   useEffect(() => {
-    console.log("status", status);
+    // console.log("status", status);
+    // console.log("session", session);
   }, [status]);
 
   return (

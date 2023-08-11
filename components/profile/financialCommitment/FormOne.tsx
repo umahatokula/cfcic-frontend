@@ -23,7 +23,7 @@ function FormOne() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FinancialCommitmentsHalf>({
+  } = useForm<FinancialCommitments>({
     defaultValues: { ...financialCommitments },
   });
   const onSubmit = (data: any) => {

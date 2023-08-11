@@ -15,18 +15,20 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: credentials?.email,
-            password: credentials?.password,
-          }),
-        });
-        const user: User = await res.json();
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: credentials?.email,
+              password: credentials?.password,
+            }),
+          }
+        );
+        let user = await res.json();
 
         if (user) {
           // Any object returned will be saved in `user` property of the JWT
@@ -49,20 +51,25 @@ const handler = NextAuth({
       return session;
     },
     async signIn({ user, account, profile, email, credentials }) {
+      const isAllowedToSignIn = user?.statusCode !== 403;
 
-      if (user?.statusCode !== 403) {
-        return true
+      if (isAllowedToSignIn) {
+        return true;
       } else {
         // Return false to display a default error message
-        return false
+        return false;
         // Or you can return a URL to redirect to:
         // return '/unauthorized'
       }
-    }
+    },
   },
   pages: {
-    signIn: "/login"
-  }
+    signIn: "/login",
+  },
+  session: {
+    // Seconds - How long until an idle session expires and is no longer valid.
+    maxAge: 1 * 24 * 60 * 60, // 1 day
+  },
 });
 
 export { handler as GET, handler as POST };

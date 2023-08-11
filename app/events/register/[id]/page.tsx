@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 function page() {
   const isMounted = useIsMounted();
   const { id } = useParams();
-  const [event, setEvent] = useState<Event>();
+  const [event, setEvent] = useState<CFCICEvent>();
   const { registration } = useAppStore();
 
   useEffect(() => {
