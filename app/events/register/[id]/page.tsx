@@ -42,7 +42,7 @@ function page() {
 
       <InfoCard
         iconUrl="/happy_heart.svg"
-        content={`Yay! We’re excited to have you fellowship with us at ${event?.name}. We trust this will change your life forever.`}
+        content={`Yay! We are excited to have you fellowship with us at ${event?.name}. We trust this will change your life forever.`}
       />
 
       <RegistrationPageDivider />
