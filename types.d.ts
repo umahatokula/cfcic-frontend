@@ -1,5 +1,3 @@
-import { Dependent } from "./types";
-
 interface LoginFormInputs {
   email: string;
   password: string;
@@ -247,6 +245,17 @@ interface Event {
   updatedAt: string;
 }
 
+interface CFCICEvent extends Event {
+  id: string;
+  name: string;
+  tagline: string;
+  banner_image: string;
+  start_date: string;
+  end_date: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 interface EventProps {
   event: Event;
   isRegistrationOpen?: boolean;
@@ -281,6 +290,16 @@ interface UserSlice {
   access_token: string;
   addUser: (obj: User, access_token: string) => void;
   resetUser: () => void;
+}
+
+interface Dependent {
+  first_name: string;
+  last_name: string;
+  birthday: string;
+  allergies: string;
+  emergency_contact: string
+  parent_profile_id: string
+  // event_attendances AttendanceDependent[]
 }
 
 interface ProfileAPIFormat {
