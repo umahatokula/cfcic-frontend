@@ -11,7 +11,7 @@ const style = {
 function Separator(props: SeparatorProps) {
   const { text } = props;
   return (
-    <div className="w-full flex items-center py-12">
+    <div className="w-full flex items-center py-6">
       <div className={style.line}></div>
       <div className="mx-4">{text}</div>
       <div className={style.line}></div>

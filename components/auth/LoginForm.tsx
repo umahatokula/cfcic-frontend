@@ -56,7 +56,7 @@ function LoginForm() {
     <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
       <div className="">
         <div className="">
-          <label>Email</label>
+          <label className="text-xs font-bold">Email Address</label>
           <div
             className={`${
               errors.email ? "form__input_error" : "form__input"
@@ -75,7 +75,7 @@ function LoginForm() {
       </div>
       <div className="mt-6">
         <div className="">
-          <label>Password</label>
+          <label className="text-xs font-bold">Password</label>
           <div
             className={`${
               errors.password ? "form__input_error" : "form__input"
