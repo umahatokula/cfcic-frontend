@@ -22,7 +22,7 @@ export default function Home() {
         Register Now
       </Link>
       <div className="flex justify-center bg-primary">
-        <Image src="/FA23.JPG" height={800} width={800} alt="Hero" />
+        <Image src="/fa23.jpg" height={800} width={800} alt="Hero" />
       </div>
       <div className="bg-gray-100">
         <h1 className="text-2xl font-extrabold p-3 text-center">
@@ -92,7 +92,7 @@ export default function Home() {
           </div>
           <div>
             <Image
-              src="/REVTokula.jpg"
+              src="/revtokula.jpg"
               width={200}
               height={200}
               alt="Bishop"

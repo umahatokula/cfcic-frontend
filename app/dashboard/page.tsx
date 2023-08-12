@@ -4,13 +4,18 @@ import DashboardCard from "@/components/DashboardCard";
 import RegistrationPageDivider from "@/components/events/registration/RegistrationPageDivider";
 import { useAppStore } from "@/lib/store";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 function DashboardPage() {
-  const { data: session, status } = useSession();
   const { addUser } = useAppStore();
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
     if (!session) return;
 
     const { user: sessionData } = session as any;
@@ -19,7 +24,7 @@ function DashboardPage() {
     const access_token = sessionData?.access_token as any;
 
     addUser(user, access_token);
-  }, [session]);
+  }, [status, session]);
 
   return (
     <>

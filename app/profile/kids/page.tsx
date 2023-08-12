@@ -4,18 +4,20 @@ import ProfileHeader from "@/components/ProfileHeader";
 import Button from "@/components/forms/Button";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { BsPlusCircle } from "react-icons/bs";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { useAppStore } from "@/lib/store";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 function AddKidsPage() {
   const isMounted = useIsMounted();
-  const router = useRouter();
   const { kidsDetails, setKidsDetails } = useAppStore();
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
   const {
     control,
@@ -51,6 +53,12 @@ function AddKidsPage() {
 
     router.push("/profile/center-details");
   };
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status]);
 
   if (!isMounted) return;
 

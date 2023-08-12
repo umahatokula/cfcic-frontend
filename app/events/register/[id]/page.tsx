@@ -18,16 +18,24 @@ function page() {
   const { id } = useParams();
   const [event, setEvent] = useState<CFCICEvent>();
   const { registration } = useAppStore();
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     const init = async () => {
-      const event = await getSingleEvent(id)
-      setEvent(event)
+      const event = await getSingleEvent(id);
+      setEvent(event);
     };
     init();
   }, []);
 
-  if(!isMounted) return;
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status]);
+
+  if (!isMounted) return;
 
   return (
     <div>
