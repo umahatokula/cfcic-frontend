@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 function AttendanceRequiredServices({ event, isRegistrationOpen }: EventProps) {
 
@@ -33,10 +34,11 @@ function AttendanceRequiredServices({ event, isRegistrationOpen }: EventProps) {
     );
 
     const reg = registerForEvent(validatedData, access_token);
+    toast.success('Successful')
     resetRegistration();
-    resetEvent();
+    // resetEvent();
 
-    router.push(`/events/register/${event?.id}/success`);
+    router.push(`/events/register/success`);
   };
 
   return (

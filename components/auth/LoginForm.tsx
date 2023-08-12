@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
+import { useIsMounted } from "@/hooks/useIsMounted";
 
 const schema = yup.object({
   email: yup.string().required("Email is required"),
@@ -18,6 +19,7 @@ function LoginForm() {
   const [showPasswordField, setShowPasswordField] = React.useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
+  const isMounted = useIsMounted();
 
   const {
     register,
@@ -51,6 +53,8 @@ function LoginForm() {
     // console.log("session", session);
   }, [status]);
 
+  if(!isMounted) return;
+
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
@@ -68,7 +72,7 @@ function LoginForm() {
               {...register("email", { required: true })}
             />
           </div>
-          <div className="text-red-600">
+          <div className="text-red-600 text-xs">
             {errors.email && <span>{errors.email?.message}</span>}
           </div>
         </div>
@@ -100,7 +104,7 @@ function LoginForm() {
               )}
             </div>
           </div>
-          <div className="text-red-600">
+          <div className="text-red-600 text-xs">
             {errors.password && <span>{errors.password?.message}</span>}
           </div>
         </div>

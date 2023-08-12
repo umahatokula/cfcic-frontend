@@ -209,9 +209,10 @@ function FormOne() {
             <div className="form-control">
               <label className="label cursor-pointer">
                 <input
+                  style={{ padding: 5 }}
                   type="radio"
                   value={"on"}
-                  className="radio checked:border-black border-black"
+                  className="radio checked:border-accent border-accent"
                   {...register("haveKidsDetails")}
                 />
                 <span className="">Tell us a bit about your kids</span>
@@ -220,9 +221,10 @@ function FormOne() {
             <div className="form-control">
               <label className="label cursor-pointer">
                 <input
+                  style={{ padding: 5 }}
                   type="radio"
                   value={"off"}
-                  className="radio checked:border-black border-black"
+                  className="radio checked:border-accent border-accent"
                   {...register("haveKidsDetails")}
                 />
                 <span className="">Please remind me later</span>
@@ -235,7 +237,9 @@ function FormOne() {
         </div>
 
         <div className="mt-20">
-          <button type="submit" className="form__btn__default">Proceed</button>
+          <button type="submit" className="form__btn__default">
+            Proceed
+          </button>
         </div>
       </form>
     </>

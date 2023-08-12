@@ -20,7 +20,8 @@ const NavBar = () => {
           </div>
           <div className="flex justify-between items-center mt-6">
             <p className="text-white text-[20px] leading-[30px] font-semibold">
-              Hi <span className="text-accent">Joan</span>, <br />
+              {/* Hi <span className="text-accent">Joan</span>, <br /> */}
+              Hi, <br />
               welcome home.
             </p>
             <Image

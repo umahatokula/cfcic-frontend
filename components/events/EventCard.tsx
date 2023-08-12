@@ -1,5 +1,6 @@
 "use client";
 
+import { formatDateToMonthDayYear } from "@/app/utils/events";
 import { useAppStore } from "@/lib/store";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,7 +19,9 @@ function EventCard({ event, isRegistrationOpen }: EventProps) {
 
   return (
     <div className="w-full">
-      <p className="text-xs font-normal text-[#565757] mb-3">{start_date}</p>
+      <p className="text-xs font-normal text-[#565757] mb-3">
+        {formatDateToMonthDayYear(start_date)}
+      </p>
       <Image
         className="rounded-tr-xl rounded-bl-xl rounded-tl-sm rounded-br-sm w-full"
         src={banner_image}
