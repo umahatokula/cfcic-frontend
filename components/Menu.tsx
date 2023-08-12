@@ -17,7 +17,7 @@ const styles = {
 };
 
 function Menu({ open, setOpen }: MenuProps) {
-  const route = useRouter();
+  const router = useRouter();
 
   const {
     clearAlert,
@@ -36,7 +36,7 @@ function Menu({ open, setOpen }: MenuProps) {
 
   function changeRoute(path: string) {
     setOpen(false);
-    route.push(path);
+    router.push(path);
   }
 
   return (
@@ -125,6 +125,8 @@ function Menu({ open, setOpen }: MenuProps) {
                     resetKidsDetails();
                     resetUser();
                     signOut();
+
+                    router.push('/login')
                   }}
                   className="w-full bg-accent text-white py-2 rounded-2xl"
                 >

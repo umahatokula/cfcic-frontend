@@ -28,7 +28,6 @@ export function formatDateToMonthDayYear(isoDateString: string) {
 // Example usage:
 const isoDateString = "2023-08-15T10:00:00.000Z";
 const formattedDate = formatDateToMonthDayYear(isoDateString);
-console.log(formattedDate);
 
 export async function getEvents() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/event`, {

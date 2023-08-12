@@ -3,16 +3,19 @@
 import ProfileHeader from "@/components/ProfileHeader";
 import Button from "@/components/forms/Button";
 import { useAppStore } from "@/lib/store";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 function CenterDetailPage() {
-  const router = useRouter();
 
   const { centerDetails, setCenterDetails } = useAppStore();
+  
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
   const {
     register,
@@ -27,6 +30,13 @@ function CenterDetailPage() {
     setCenterDetails(data)
     router.push("/profile/financial-commitments");
   };
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status]);
+
   return (
     <div>
       <ProfileHeader

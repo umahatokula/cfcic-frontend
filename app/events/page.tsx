@@ -1,10 +1,16 @@
 import React from "react";
 import { getEvents } from "../utils/events";
 import EventCard from "@/components/events/EventCard";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
 async function EventsPage() {
   const events: Event[] = await getEvents();
   const [upcomingEvent, ...otherevents] = events;
+  const session = await getServerSession(authOptions);
+
+  if (!session) redirect("/login");
 
   return (
     <div>
