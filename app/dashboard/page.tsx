@@ -31,13 +31,13 @@ function DashboardPage() {
           heading="WordShop"
           body="Buy Mp3 messages, books"
           img="/customer_support.svg"
-          link="/"
+          link="https://wordshop.christfamilyministries.org/"
         />
         <DashboardCard
           heading="Growth Track"
           body="Complete 4 short modules and become a full member of CFCIC"
           img="/up.png"
-          link="/"
+          link="https://growth.christfamilyministries.org/"
         />
         <DashboardCard
           heading="Finance"
@@ -47,7 +47,7 @@ function DashboardPage() {
         />
         <DashboardCard
           heading="Events"
-          body="Register for Believers’ Conventions & Faith Adventures"
+          body="Our Ministry Events"
           img="/20.png"
           link="/events"
         />
@@ -64,7 +64,7 @@ function DashboardPage() {
           link="/"
         />
       </div>
-      <RegistrationPageDivider />
+      {/* <RegistrationPageDivider />
       <p className="text-base font-medium text-center mb-10 mt-3">
         Manage Account
       </p>
@@ -111,7 +111,7 @@ function DashboardPage() {
           img="/home.png"
           link="/"
         />
-      </div>
+      </div> */}
     </>
   );
 }
