@@ -116,13 +116,13 @@ interface AlertState {
   clearAlert: () => void;
 }
 
-interface EventRegistration {
+interface EventRegistrationBase {
   event_id: string;
   user_id: string | number;
   in_person: string;
 }
 
-interface EventRegistrationServices extends EventRegistration {
+interface EventRegistrationServices extends EventRegistrationBase {
   requires_feeding: string;
   requires_accomodation: string;
   requires_transport: string;
@@ -133,6 +133,10 @@ interface EventRegistrationAllRequirements extends EventRegistrationServices {
   dates_attending?: string[];
   existing_dependents?: string[];
   new_dependents?: string[];
+}
+
+interface EventRegistrationDatesAttending extends EventRegistrationBase {
+  dates_attending: string[];
 }
 
 interface EventRegistrationAPIFormat extends EventRegistrationAllRequirements {
@@ -297,8 +301,8 @@ interface Dependent {
   last_name: string;
   birthday: string;
   allergies: string;
-  emergency_contact: string
-  parent_profile_id: string
+  emergency_contact: string;
+  parent_profile_id: string;
   // event_attendances AttendanceDependent[]
 }
 

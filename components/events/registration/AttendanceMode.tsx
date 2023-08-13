@@ -11,8 +11,14 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
-  const { access_token, user, registration, setRegistration, resetEvent, resetRegistration } =
-    useAppStore();
+  const {
+    access_token,
+    user,
+    registration,
+    setRegistration,
+    resetEvent,
+    resetRegistration,
+  } = useAppStore();
 
   const router = useRouter();
 
@@ -21,7 +27,7 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<EventRegistration>({
+  } = useForm<EventRegistrationBase>({
     defaultValues: { ...registration },
   });
 
@@ -49,7 +55,7 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
     );
 
     const reg = await registerForEvent(validatedData, access_token);
-    toast.success('Successful')
+    toast.success("Successful");
     resetRegistration();
     // resetEvent();
 
