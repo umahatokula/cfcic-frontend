@@ -11,7 +11,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Christ Family Center International Churches",
+  title: "Christ Family Ministry",
   description: "...a happy and successful people",
 };
 

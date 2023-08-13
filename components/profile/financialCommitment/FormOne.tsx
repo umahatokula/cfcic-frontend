@@ -1,3 +1,5 @@
+"use client";
+
 import { createProfile, formatProfileData } from "@/app/utils/profile";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useAppStore } from "@/lib/store";
@@ -26,8 +28,7 @@ function FormOne() {
   } = useForm<FinancialCommitments>({
     defaultValues: { ...financialCommitments },
   });
-  const onSubmit = (data: any) => {
-
+  const onSubmit = async (data: any) => {
     setFinancialCommitments(data);
     const onboardingData = {
       ...biodata,
@@ -35,9 +36,13 @@ function FormOne() {
       ...financialCommitments,
     };
 
-    const validatedData = formatProfileData({...onboardingData, dependents: kidsDetails});
+    const validatedData = formatProfileData({
+      ...onboardingData,
+      dependents: kidsDetails,
+    });
 
-    createProfile(validatedData, access_token);
+    const res = await createProfile(validatedData, access_token);
+    console.log("🚀 ~ file: FormOne.tsx:45 ~ onSubmit ~ res:", res)
   };
 
   const isPartnerBool = watch("is_partner");
