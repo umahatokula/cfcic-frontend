@@ -7,15 +7,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "images.nightcafe.studio",
-      },
-      {
-        protocol: "https",
-        hostname: "example.com",
-      },
-      {
-        protocol: "https",
-        hostname: "images.pexels.com",
+        hostname: "cfm-media-audio.s3.amazonaws.com",
       },
     ],
   },
