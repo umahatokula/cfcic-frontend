@@ -1,13 +1,12 @@
 "use client";
 
-import React from "react";
-import Button from "../forms/Button";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import CircleLoader from "react-spinners/CircleLoader";
 
 const schema = yup.object({
   name: yup.string().required("Full name is required"),
@@ -22,6 +21,7 @@ const schema = yup.object({
 });
 
 function RegistrationForm() {
+  const [loading, setloading] = useState<boolean>(false)
   const router = useRouter();
 
   const {
@@ -34,15 +34,7 @@ function RegistrationForm() {
   });
   const onSubmit = async (data: any, e: any) => {
     try {
-      // const res = await axios({
-      //   method: "post",
-      //   url: `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
-      //   data: data,
-      // });
-
-      // const {
-      //   data: { access_token },
-      // } = res;
+      setloading(true)
 
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
@@ -61,9 +53,11 @@ function RegistrationForm() {
         throw new Error("Failed to fetch data");
       }
 
+      setloading(false)
       router.push('/login');
       
     } catch (error) {
+      setloading(false)
       console.log("error", error);
     }
   };
@@ -150,8 +144,9 @@ function RegistrationForm() {
       </div>
 
       <div className="mt-16">
-        <button type="submit" className="form__btn__default">
-          Register
+        <button type="submit" className="form__btn__default flex items-center justify-center">
+          <span className="mr-3">Register</span>
+          <CircleLoader color="#eecba3" size={20} loading={loading} />
         </button>
       </div>
     </form>
