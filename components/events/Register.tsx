@@ -6,13 +6,14 @@ import RegistrationPageDivider from "./registration/RegistrationPageDivider";
 import AttendanceMode from "./registration/AttendanceMode";
 import AttendanceRequiredServices from "./registration/AttendanceRequiredServices";
 import { useAppStore } from "@/lib/store";
+import NewDependents from "./registration/NewDependents";
 
 interface RegisterProps {
   event: Event;
 }
 
 function Register({ event }: RegisterProps) {
-  const { registration } = useAppStore();
+  const { registration, regFormStep } = useAppStore();
 
   return (
     <div>
@@ -32,11 +33,17 @@ function Register({ event }: RegisterProps) {
 
       <RegistrationPageDivider />
 
-      <AttendanceMode event={event!} />
+      {regFormStep === 1 && (
+        <>
+          <AttendanceMode event={event!} />
 
-      {event && registration.in_person == "1" && (
-        <AttendanceRequiredServices event={event!} />
+          {event && registration.in_person == "1" && (
+            <AttendanceRequiredServices event={event!} />
+          )}
+        </>
       )}
+
+      {regFormStep === 2 && <NewDependents />}
     </div>
   );
 }

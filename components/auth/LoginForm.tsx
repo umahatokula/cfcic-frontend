@@ -17,7 +17,7 @@ const schema = yup.object({
 });
 
 function LoginForm() {
-  const [loading, setloading] = useState<boolean>(false)
+  const [loading, setloading] = useState<boolean>(false);
   const [showPasswordField, setShowPasswordField] = React.useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -34,7 +34,7 @@ function LoginForm() {
 
   const onSubmit = async (data: any, e: any) => {
     e.preventDefault();
-    setloading(true)
+    setloading(true);
 
     const result = await signIn("credentials", {
       ...data,
@@ -46,9 +46,9 @@ function LoginForm() {
 
     if (result?.error === "AccessDenied") {
       toast.error(session?.user?.message || "Credentials do not match");
-      setloading(false)
+      setloading(false);
     } else {
-      setloading(false)
+      setloading(false);
       router.push("/dashboard");
     }
   };
@@ -116,7 +116,10 @@ function LoginForm() {
       </div>
 
       <div className="mt-16">
-        <button type="submit" className={`${loading ? 'form__btn__default-disbaled' : 'form__btn__default'} flex items-center justify-center`}>
+        <button
+          type="submit"
+          className={`form__btn__default flex items-center justify-center`}
+        >
           <span className="mr-3">Login</span>
           <CircleLoader color="#eecba3" size={20} loading={loading} />
         </button>

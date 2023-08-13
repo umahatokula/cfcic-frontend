@@ -1,3 +1,4 @@
+import { number } from "yup";
 import { StateCreator } from "zustand";
 
 const initialState = {
@@ -12,7 +13,8 @@ const initialState = {
     dates_attending: [],
     existing_dependents: [],
     new_dependents: [],
-  }
+  },
+  regFormStep: 1
 }
 
 export const createEventRegistrationSlice: StateCreator<

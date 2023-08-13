@@ -132,7 +132,7 @@ interface EventRegistrationAllRequirements extends EventRegistrationServices {
   services_required: string[];
   dates_attending?: string[];
   existing_dependents?: string[];
-  new_dependents?: string[];
+  new_dependents?: Dependent[];
 }
 
 interface EventRegistrationDatesAttending extends EventRegistrationBase {
@@ -148,6 +148,7 @@ interface EventRegistrationAPIFormat extends EventRegistrationAllRequirements {
 
 interface EventReistrationSlice {
   registration: EventRegistrationAllRequirements;
+  regFormStep: number;
   setRegistration: (obj: EventRegistrationAllRequirements) => void;
   resetRegistration: () => void;
 }
@@ -302,7 +303,7 @@ interface Dependent {
   birthday: string;
   allergies: string;
   emergency_contact: string;
-  parent_profile_id: string;
+  // parent_profile_id: string;
   // event_attendances AttendanceDependent[]
 }
 

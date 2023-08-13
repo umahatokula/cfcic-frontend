@@ -144,7 +144,7 @@ function RegistrationForm() {
       </div>
 
       <div className="mt-16">
-        <button disabled={loading} type="submit" className={`${loading ? 'form__btn__default-disbaled' : 'form__btn__default'} flex items-center justify-center`}>
+        <button disabled={loading} type="submit" className={`form__btn__default flex items-center justify-center`}>
           <span className="mr-3">Register</span>
           <CircleLoader color="#eecba3" size={20} loading={loading} />
         </button>
