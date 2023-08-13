@@ -17,7 +17,7 @@ function RegisterPage() {
         </p>
       </div>
 
-      <SocialLogin iconPath="/google.svg" text="Google" />
+      {/* <SocialLogin iconPath="/google.svg" text="Google" />
 
       <Separator text="or" />
 
@@ -25,7 +25,7 @@ function RegisterPage() {
 
       <Separator text="or" />
 
-      <SocialLogin iconPath="/gmail.svg" text="Gmail" />
+      <SocialLogin iconPath="/gmail.svg" text="Gmail" /> */}
 
       <div className="w-full mt-8">
         <RegistrationForm />
