@@ -55,18 +55,26 @@ body {
   @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-4 bg-accent text-white border-[#77858C];
 }
 
+label {
+  @apply text-xs font-bold;
+}
+
 input, select {
   @apply px-4 py-2 focus-visible:outline-none;
 }
 
 .form__btn__default {
-  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-4 bg-accent text-white border-[#77858C];
+  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-3 bg-accent text-white border-[#77858C];
+}
+
+.form__btn__default-disbaled {
+  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-3 bg-accentDisabled text-gray-500 border-[#77858C] cursor-not-allowed;
 }
 
 .link__btn__default {
-  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-4 bg-accent text-white border-[#77858C] block;
+  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-3 bg-accent text-white border-[#77858C] block;
 }
 
 .link__btn__outline-primary {
-  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-4 bg-transparent text-[#03045E] border-[1.5px] border-[#03045E] block;
+  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-3 bg-transparent text-[#03045E] border-[1.5px] border-[#03045E] block;
 }
