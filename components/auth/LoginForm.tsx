@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { PiEyeLight, PiEyeSlashLight } from "react-icons/pi";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import { useIsMounted } from "@/hooks/useIsMounted";
+import CircleLoader from "react-spinners/CircleLoader";
 
 const schema = yup.object({
   email: yup.string().required("Email is required"),
@@ -16,6 +17,7 @@ const schema = yup.object({
 });
 
 function LoginForm() {
+  const [loading, setloading] = useState<boolean>(false)
   const [showPasswordField, setShowPasswordField] = React.useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -32,6 +34,7 @@ function LoginForm() {
 
   const onSubmit = async (data: any, e: any) => {
     e.preventDefault();
+    setloading(true)
 
     const result = await signIn("credentials", {
       ...data,
@@ -43,7 +46,9 @@ function LoginForm() {
 
     if (result?.error === "AccessDenied") {
       toast.error(session?.user?.message || "Credentials do not match");
+      setloading(false)
     } else {
+      setloading(false)
       router.push("/dashboard");
     }
   };
@@ -53,7 +58,7 @@ function LoginForm() {
     // console.log("session", session);
   }, [status]);
 
-  if(!isMounted) return;
+  if (!isMounted) return;
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
@@ -111,8 +116,9 @@ function LoginForm() {
       </div>
 
       <div className="mt-16">
-        <button type="submit" className="form__btn__default">
-          Login
+        <button type="submit" className="form__btn__default flex items-center justify-center">
+          <span className="mr-3">Login</span>
+          <CircleLoader color="#eecba3" size={20} loading={loading} />
         </button>
       </div>
     </form>
