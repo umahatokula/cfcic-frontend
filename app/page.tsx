@@ -30,7 +30,7 @@ export default function Home() {
         </h1>
         <p className="text-gray-700 p-3">
           Faith Adventure is a Christ Family Ministry annual convention where
-          beleivers from all works of life come together to fellowship under the
+          believers from all works of life come together to fellowship under the
           ministry of the word and the love of God.
         </p>
       </div>
