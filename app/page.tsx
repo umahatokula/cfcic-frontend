@@ -18,7 +18,10 @@ export default function Home() {
 
         <AiOutlineBell className="text-white cursor-pointer" />
       </div>
-      <Link href={'/events'} className="font-bold text-2xl p-5 bg-primary text-white cursor-pointer block">
+      <Link
+        href={"/events"}
+        className="font-bold text-2xl p-5 bg-accent text-center text-white cursor-pointer block"
+      >
         Register Now
       </Link>
       <div className="flex justify-center bg-primary">
@@ -30,7 +33,7 @@ export default function Home() {
         </h1>
         <p className="text-gray-700 p-3">
           Faith Adventure is a Christ Family Ministry annual convention where
-          believers from all works of life come together to fellowship under the
+          believers from all walks of life come together to fellowship under the
           ministry of the word and the love of God.
         </p>
       </div>
@@ -38,13 +41,13 @@ export default function Home() {
         <div className="items-center p-5">
           <GrLocation className="mb-3 text-3xl" />
           <h2 className="text-l font-bold">Location</h2>
-          Christ Family Center, Gboko (Theatre of faith)
+          Christ Family Center, Gboko (Theatre of Faith)
         </div>
 
         <div className="p-5">
           <BsCalendar2DateFill className="mb-3 text-3xl" />
           <h1 className="text-l font-bold">Date</h1>
-          10th Sept. - 17th Sept 2023
+          10th Sept. - 17th Sept. 2023
         </div>
       </div>
       <div className="">
@@ -53,7 +56,7 @@ export default function Home() {
         </h1>
       </div>
       <div className="">
-        <div className="grid grid-cols-2 gap-5 p-6 mt-5">
+        <div className="grid grid-cols-2 gap-5 p-6 mt-5 place-items-center">
           <div className="">
             <Image
               src="/REVadah.jpg"
@@ -99,7 +102,7 @@ export default function Home() {
               className="drop-shadow-md rounded-md"
             />
             <h1 className="font-bold text-gray-700 mt-4">Rev Arome Tokula</h1>
-            <p className="text-gray-600">Christ Family Ministries (Host)</p>
+            <p className="text-gray-600">Christ Family Ministry (Host)</p>
           </div>
           <div className="">
             <Image
@@ -121,7 +124,7 @@ export default function Home() {
               className="drop-shadow-md rounded-md"
             />
             <h1 className="font-bold text-gray-700 mt-4">Rev Joshua Tende</h1>
-            <p>Father's Delight Ministries</p>
+            <p>The Father's Delight International Ministry</p>
           </div>
         </div>
       </div>
@@ -140,15 +143,15 @@ export default function Home() {
         <div className="p-5">
           <BsCalendar2DateFill className="mb-3 text-3xl text-cfcblue-200" />
           <h1 className="text-l font-bold text-gray-300">Date</h1>
-          <h1 className="text-gray-300">10th Sept. - 17th Sept 2023</h1>
+          <h1 className="text-gray-300">10th Sept. - 17th Sept. 2023</h1>
         </div>
 
         <div className="p-5">
           <AiFillHome className="mb-3 text-3xl text-cfcblue-200" />
           <h1 className="text-l font-bold text-gray-300">
-            Accomondation & Feeding
+            Accommodation & Feeding
           </h1>
-          <p className="text-gray-300">Free Accomondation and Feeding </p>
+          <p className="text-gray-300">Free Accommodation and Feeding </p>
         </div>
         <div className="flex justify-center text-white mt-5">
           <div>
@@ -172,7 +175,9 @@ export default function Home() {
       </div>
       <div>
         <div className="p-5">
-          <p className="text-[11px] text-center">Christ Family Ministries &copy;</p>
+          <p className="text-[11px] text-center">
+            Christ Family Ministry &copy;
+          </p>
         </div>
       </div>
     </>
