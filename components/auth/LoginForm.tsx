@@ -116,7 +116,7 @@ function LoginForm() {
       </div>
 
       <div className="mt-16">
-        <button type="submit" className="form__btn__default flex items-center justify-center">
+        <button type="submit" className={`${loading ? 'form__btn__default-disbaled' : 'form__btn__default'} flex items-center justify-center`}>
           <span className="mr-3">Login</span>
           <CircleLoader color="#eecba3" size={20} loading={loading} />
         </button>

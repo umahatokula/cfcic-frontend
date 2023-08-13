@@ -78,14 +78,14 @@ function RegistrationForm() {
               {...register("name", { required: true })}
             />
           </div>
-          <span className="text-red-600 text-sm">
+          <span className="text-red-600 text-xs">
             {errors.name && <span>{errors.name?.message}</span>}
           </span>
         </div>
       </div>
       <div className="mt-6">
         <div className="">
-          <label>Email</label>
+          <label>Email Address</label>
           <div
             className={`${
               errors.email ? "form__input_error" : "form__input"
@@ -97,7 +97,7 @@ function RegistrationForm() {
               {...register("email", { required: true })}
             />
           </div>
-          <span className="text-red-600 text-sm">
+          <span className="text-red-600 text-xs">
             {errors.email && <span>{errors.email?.message}</span>}
           </span>
         </div>
@@ -116,7 +116,7 @@ function RegistrationForm() {
               {...register("password", { required: true })}
             />
           </div>
-          <span className="text-red-600 text-sm">
+          <span className="text-red-600 text-xs">
             {errors.password && <span>{errors.password?.message}</span>}
           </span>
         </div>
@@ -135,7 +135,7 @@ function RegistrationForm() {
               {...register("passwordConfirmation", { required: true })}
             />
           </div>
-          <span className="text-red-600 text-sm">
+          <span className="text-red-600 text-xs">
             {errors.passwordConfirmation && (
               <span>{errors.passwordConfirmation?.message}</span>
             )}
@@ -144,7 +144,7 @@ function RegistrationForm() {
       </div>
 
       <div className="mt-16">
-        <button type="submit" className="form__btn__default flex items-center justify-center">
+        <button disabled={loading} type="submit" className={`${loading ? 'form__btn__default-disbaled' : 'form__btn__default'} flex items-center justify-center`}>
           <span className="mr-3">Register</span>
           <CircleLoader color="#eecba3" size={20} loading={loading} />
         </button>

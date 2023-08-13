@@ -88,7 +88,7 @@ export async function registerForEvent(
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    // throw new Error("Failed to fetch data");
   }
 
   return res.json();
@@ -115,7 +115,7 @@ export async function updateEventRegistration(
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    // throw new Error("Failed to fetch data");
   }
 
   return res.json();

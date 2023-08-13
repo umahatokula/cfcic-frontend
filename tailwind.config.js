@@ -20,6 +20,7 @@ module.exports = {
       colors: {
         'primary': '#03045E',
         'accent': '#FB8500',
+        'accentDisabled': '#f3be82',
         cfcblue: {
           100: '#CAF0F8',
           200: '#48CAE4',

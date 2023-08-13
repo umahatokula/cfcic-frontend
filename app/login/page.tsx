@@ -14,13 +14,13 @@ function LoginPage() {
         </p>
       </div>
 
-      {/* <SocialLogin iconPath="/google.svg" text="Google" />
+      {/* <SocialLogin iconPath="/google.svg" text="Google" /> */}
 
-      <Separator text="or" />
+      {/* <Separator text="or" /> */}
 
-      <SocialLogin iconPath="/fb.svg" text="Facebook" />
+      {/* <SocialLogin iconPath="/fb.svg" text="Facebook" /> */}
 
-      <Separator text="or" /> */}
+      {/* <Separator text="or" /> */}
 
       <LoginForm />
 
