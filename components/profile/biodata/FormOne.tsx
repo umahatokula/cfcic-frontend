@@ -1,4 +1,5 @@
-import Button from "@/components/forms/Button";
+"use client";
+
 import { useAppStore } from "@/lib/store";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

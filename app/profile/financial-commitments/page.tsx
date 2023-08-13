@@ -1,23 +1,18 @@
-"use client";
-
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import ProfileHeader from "@/components/ProfileHeader";
 import FormOne from "@/components/profile/financialCommitment/FormOne";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import React  from "react";
 
-function FinancialCommitmentsPage() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
+async function FinancialCommitmentsPage() {
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [status]);
+  const session = await getServerSession(authOptions);
+
+  if (!session) redirect("/login");
 
   return (
-    <div>
+    <>
       <ProfileHeader
         activeStep={4}
         showBackButton={true}
@@ -25,8 +20,9 @@ function FinancialCommitmentsPage() {
         subHeading="Tell us a bit about yourself so we can serve you better."
         backUrl={"/profile/center-details"}
       />
+      
       <FormOne />
-    </div>
+    </>
   );
 }
 

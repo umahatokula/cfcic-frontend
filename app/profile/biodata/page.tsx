@@ -1,23 +1,14 @@
-"use client";
-
 import ProfileHeader from "@/components/ProfileHeader";
-import React, { useEffect } from "react";
-import { useAppStore } from "@/lib/store";
-import { useSession } from "next-auth/react";
+import React from "react";
 import FormOne from "@/components/profile/biodata/FormOne";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-function BioDataPage() {
+async function BioDataPage() {
+  const session = await getServerSession(authOptions);
 
-  const { biodata, setBiodata } = useAppStore();
-  const { data: session, status } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [status]);
+  if (!session) redirect("/login");
 
   return (
     <div>

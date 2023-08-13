@@ -15,8 +15,10 @@ const style = {
 };
 
 function ProfileHeader(props: ProfileHeaderProps) {
+  
   const { activeStep, heading, subHeading, showBackButton = false, backUrl="/" } = props;
   const steps = [1, 2, 3, 4];
+  
   return (
     <div className="relative">
       <div className="w-full">

@@ -50,7 +50,7 @@ function Menu({ open, setOpen }: MenuProps) {
             ease: "linear",
             duration: 0.3,
           }}
-          className="absolute top-0 left-0 w-full"
+          className="absolute top-0 left-0 w-full z-50"
           ref={ref}
         >
           <div className="bg-[#FBFDFF] text-[#01080D] p-10">

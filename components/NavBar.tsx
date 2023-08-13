@@ -9,18 +9,8 @@ import { GrClose } from "react-icons/gr";
 import { MdMenu } from "react-icons/md";
 
 function NavBar() {
+  
   const [open, setOpen] = useState<boolean>(false);
-
-  const {
-    clearAlert,
-    resetBiodata,
-    resetCenterDetails,
-    resetEvent,
-    resetRegistration,
-    resetFinancialCommitments,
-    resetKidsDetails,
-    resetUser,
-  } = useAppStore();
 
   return (
     <>

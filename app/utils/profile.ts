@@ -35,9 +35,9 @@ export async function createProfile(
     },
   });
 
-  if (!res.ok) {
-    throw new Error("Failed to create profile");
-  }
+  // if (!res.ok) {
+  //   throw new Error("Failed to create profile");
+  // }
 
   return res.json();
 }
