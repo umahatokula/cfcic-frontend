@@ -116,6 +116,9 @@ function Menu({ open, setOpen }: MenuProps) {
               <li className="mt-5 py-3">
                 <button
                   onClick={() => {
+                    signOut();
+                    router.push('/login')
+
                     clearAlert();
                     resetBiodata();
                     resetCenterDetails();
@@ -124,9 +127,6 @@ function Menu({ open, setOpen }: MenuProps) {
                     resetFinancialCommitments();
                     resetKidsDetails();
                     resetUser();
-                    signOut();
-
-                    router.push('/login')
                   }}
                   className="w-full bg-accent text-white py-2 rounded-2xl"
                 >
