@@ -1,57 +1,75 @@
-import { useAppStore } from '@/lib/store';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import React from 'react'
-import { Controller, useForm } from 'react-hook-form';
-import { AiOutlineMinusCircle } from 'react-icons/ai';
-import { BsPlusCircle } from 'react-icons/bs';
+import { useIsMounted } from "@/hooks/useIsMounted";
+import { useAppStore } from "@/lib/store";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { Controller, useForm } from "react-hook-form";
+import { AiOutlineMinusCircle } from "react-icons/ai";
+import { BsPlusCircle } from "react-icons/bs";
 
 function NewDependents() {
-    const { registration, setRegistration } = useAppStore();
-    const router = useRouter();
-  
-    const {
-      control,
-      handleSubmit,
-      reset,
-      formState: { errors },
-    } = useForm<NewKidInputs>();
-    const [kids, setKids] = React.useState<Dependent[]>([]);
-  
-    const handleAddKid = ({ newKid }: NewKidInputs) => {
-      if (
-        newKid.first_name.trim() !== "" &&
-        newKid.last_name.trim() !== "" &&
-        newKid.birthday &&
-        newKid.allergies &&
-        newKid.emergency_contact
-      ) {
-        console.log("newKid", newKid);
-        setKids([...kids, newKid]);
-        setRegistration({...registration, new_dependents: [...kids]});
-        reset();
-      }
-    };
+  const { currentEvent, registration, setRegistration } = useAppStore();
+  const router = useRouter();
+  const isMounted = useIsMounted();
 
-    const handleRemoveKid = (index: number) => {
-      const updatedDependents = registration?.new_dependents?.filter((_, i) => i !== index);
-      console.log("🚀 ~ file: NewDependents.tsx:38 ~ handleRemoveKid ~ updatedDependents:", updatedDependents)
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<NewKidInputs>();
+  const [kids, setKids] = React.useState<Dependent[]>([]);
 
-    //   setRegistration({...registration, new_dependents: [...updatedDependents]});
-    };
-  
-    const handleSubmitKids = () => {
-      console.log(kids);
-      setRegistration({...registration});
-  
-      router.push("/profile/center-details");
-    };
-  
+  const handleAddKid = ({ newKid }: NewKidInputs) => {
+    if (
+      newKid.first_name.trim() !== "" &&
+      newKid.last_name.trim() !== "" &&
+      newKid.birthday &&
+      newKid.allergies &&
+      newKid.emergency_contact
+    ) {
+    //   setKids([...kids, newKid]);
+      const { new_dependents } = registration;
+      new_dependents?.push(newKid)
+
+      setRegistration({ ...registration, new_dependents: new_dependents });
+      reset();
+    }
+  };
+
+  const handleRemoveKid = (index: number) => {
+    const updatedDependents = registration?.new_dependents?.filter(
+      (_, i) => i !== index
+    );
+    console.log(
+      "🚀 ~ file: NewDependents.tsx:38 ~ handleRemoveKid ~ updatedDependents:",
+      updatedDependents
+    );
+
+    setRegistration({ ...registration, new_dependents: updatedDependents });
+  };
+
+  const handleSubmitKids = () => {
+    console.log(kids);
+    setRegistration({ ...registration });
+
+    router.push(`/events/register/${currentEvent?.id}?step=${3}`);
+  };
+
+  const handleCancel = () => {
+    console.log(kids);
+    setRegistration({ ...registration });
+
+    router.push(`/events/register/${currentEvent?.id}?step=${3}`);
+  };
+
+  if (!isMounted) return;
+
   return (
     <>
       <div>
         <form onSubmit={handleSubmit(handleAddKid)}>
-          {/* Name */}
+          {/* First Name */}
           <div className="mt-4">
             <Controller
               name="newKid.first_name"
@@ -60,19 +78,42 @@ function NewDependents() {
               rules={{ required: "Name is required" }}
               render={({ field }) => (
                 <div className="">
-                  <label>Full Name</label>
+                  <label>First Name</label>
                   <div className="form__input flex justify-between">
                     <input
                       className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
                       type="text"
                       {...field}
-                      placeholder="Enter kid's name"
+                      placeholder="Enter kid's first name"
                     />
                   </div>
                 </div>
               )}
             />
             {/* {errors["newKid.first_name"] && <p>This field is required</p>} */}
+          </div>
+          {/* Last Name */}
+          <div className="mt-4">
+            <Controller
+              name="newKid.last_name"
+              control={control}
+              defaultValue=""
+              rules={{ required: "Name is required" }}
+              render={({ field }) => (
+                <div className="">
+                  <label>Last Name</label>
+                  <div className="form__input flex justify-between">
+                    <input
+                      className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
+                      type="text"
+                      {...field}
+                      placeholder="Enter kid's last name"
+                    />
+                  </div>
+                </div>
+              )}
+            />
+            {/* {errors["newKid.last_name"] && <p>This field is required</p>} */}
           </div>
           {/* Birthday */}
           <div className="mt-4">
@@ -145,7 +186,6 @@ function NewDependents() {
           </div>
           <button className="flex justify-end mt-8" type="submit">
             <div className="flex space-x-2 font-semibold text-accent items-center">
-              {/* <Image src={"/plus.svg"} alt="icon" width={15} height={15} /> */}
               <BsPlusCircle className="w-5 h-5" width={15} height={15} />
               <span className="text-base">
                 Register {kids.length > 0 ? "another" : "a"} kid
@@ -158,7 +198,7 @@ function NewDependents() {
           {registration?.new_dependents?.map((kid, index) => (
             <div className="mt-8" key={index}>
               <li>
-                <span>{kid.first_name}</span>
+                <span>{kid.first_name}</span> <span>{kid.last_name}</span>
                 <br />
                 Birthday: {kid.birthday}
                 <br />
@@ -192,17 +232,18 @@ function NewDependents() {
           type="button"
           className="link__btn__default block"
         >
-          Next
+          Proceed
         </button>
-        <Link
+        <button
+          onClick={handleCancel}
+          type="button"
           className="link__btn__outline-primary block"
-          href={"/profile/center-details"}
         >
-          Skip for Now
-        </Link>
+          Cancel
+        </button>
       </div>
     </>
-  )
+  );
 }
 
-export default NewDependents
+export default NewDependents;

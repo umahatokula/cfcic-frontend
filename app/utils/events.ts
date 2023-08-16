@@ -25,10 +25,7 @@ export function formatDateToMonthDayYear(isoDateString: string) {
   return formattedDate;
 }
 
-// Example usage:
-const isoDateString = "2023-08-15T10:00:00.000Z";
-const formattedDate = formatDateToMonthDayYear(isoDateString);
-
+// Get all events
 export async function getEvents() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/event`, {
     next: { revalidate: 10 },
@@ -42,6 +39,7 @@ export async function getEvents() {
   return events;
 }
 
+// Get single event
 export async function getSingleEvent(id: any) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/event/${id}`);
   if (!res.ok) {
@@ -116,6 +114,30 @@ export async function updateEventRegistration(
 
   if (!res.ok) {
     // throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
+// Update event registration
+export async function getUserEventRegistration(
+  access_token: string,
+  event_id: string,
+  user_id: string
+) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/attendance/${event_id}/${user_id}`,
+    {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + access_token,
+      },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error('Could not fetch user event registration')
   }
 
   return res.json();

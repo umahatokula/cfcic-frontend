@@ -10,6 +10,7 @@ import { signIn, useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import CircleLoader from "react-spinners/CircleLoader";
+import { login } from "@/app/utils/auth";
 
 const schema = yup.object({
   email: yup.string().required("Email is required"),
@@ -36,10 +37,7 @@ function LoginForm() {
     e.preventDefault();
     setloading(true);
 
-    const result = await signIn("credentials", {
-      ...data,
-      redirect: false,
-    });
+    const result = await login(data);
     // console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ result:", result);
     // console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ session:", session);
     // console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ status:", status);

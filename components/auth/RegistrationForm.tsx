@@ -7,6 +7,8 @@ import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import CircleLoader from "react-spinners/CircleLoader";
+import { signIn, useSession } from "next-auth/react";
+import { login } from "@/app/utils/auth";
 
 const schema = yup.object({
   name: yup.string().required("Full name is required"),
@@ -21,8 +23,9 @@ const schema = yup.object({
 });
 
 function RegistrationForm() {
-  const [loading, setloading] = useState<boolean>(false)
+  const [loading, setloading] = useState<boolean>(false);
   const router = useRouter();
+  const { data: session, status } = useSession();
 
   const {
     register,
@@ -34,7 +37,7 @@ function RegistrationForm() {
   });
   const onSubmit = async (data: any, e: any) => {
     try {
-      setloading(true)
+      setloading(true);
 
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
@@ -48,16 +51,24 @@ function RegistrationForm() {
       );
 
       if (!res.ok) {
-        // This will activate the closest `error.js` Error Boundary
         toast.error("Error signing up");
         throw new Error("Failed to fetch data");
       }
 
-      setloading(false)
-      router.push('/login');
-      
+      const result = await login({
+        email: data.email,
+        password: data.password,
+      });
+
+      if (result?.error === "AccessDenied") {
+        toast.error(session?.user?.message || "Credentials do not match");
+        setloading(false);
+      } else {
+        setloading(false);
+        router.push("/dashboard");
+      }
     } catch (error) {
-      setloading(false)
+      setloading(false);
       console.log("error", error);
     }
   };
@@ -144,7 +155,11 @@ function RegistrationForm() {
       </div>
 
       <div className="mt-16">
-        <button disabled={loading} type="submit" className={`form__btn__default flex items-center justify-center`}>
+        <button
+          disabled={loading}
+          type="submit"
+          className={`form__btn__default flex items-center justify-center`}
+        >
           <span className="mr-3">Register</span>
           <CircleLoader color="#eecba3" size={20} loading={loading} />
         </button>

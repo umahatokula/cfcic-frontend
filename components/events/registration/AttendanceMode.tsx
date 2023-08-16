@@ -15,9 +15,12 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
     access_token,
     user,
     registration,
+    reg_form_step,
     setRegistration,
     resetEvent,
     resetRegistration,
+    setComingWithKids,
+    setRegFormStep,
   } = useAppStore();
 
   const router = useRouter();
@@ -38,6 +41,9 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
       user_id: user?.id!,
       in_person: "1",
     });
+
+    setRegFormStep(3)
+    router.push(`/events/register/${event?.id}?step=${3}`)
   };
 
   const onSubmitOnline = async (data: any) => {

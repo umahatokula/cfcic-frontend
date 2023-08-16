@@ -148,8 +148,11 @@ interface EventRegistrationAPIFormat extends EventRegistrationAllRequirements {
 
 interface EventReistrationSlice {
   registration: EventRegistrationAllRequirements;
-  regFormStep: number;
+  reg_form_step: number;
+  coming_with_kids: boolean;
   setRegistration: (obj: EventRegistrationAllRequirements) => void;
+  setRegFormStep: (obj: number) => void;
+  setComingWithKids: (obj: boolean) => void;
   resetRegistration: () => void;
 }
 

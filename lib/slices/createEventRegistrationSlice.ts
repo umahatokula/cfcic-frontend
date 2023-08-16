@@ -14,13 +14,16 @@ const initialState = {
     existing_dependents: [],
     new_dependents: [],
   },
-  regFormStep: 1
-}
+  reg_form_step: 1, // 1 = Attendance Mode, 2 = Coming with Kids, 3 = Require accommodation, Feeding and Transportation
+  coming_with_kids: false,
+};
 
 export const createEventRegistrationSlice: StateCreator<
   EventReistrationSlice
 > = (set) => ({
   ...initialState,
   setRegistration: (obj) => set({ registration: obj }),
+  setRegFormStep: (step) => set({ reg_form_step: step }),
+  setComingWithKids: (data) => set({ coming_with_kids: data }),
   resetRegistration: () => set(() => ({ ...initialState })),
 });
