@@ -56,6 +56,7 @@ export function formatEventRegistrationData(
   event_id: string,
   user_id: string
 ) {
+
   const validatedData = {
     ...data,
     event_id: event_id,

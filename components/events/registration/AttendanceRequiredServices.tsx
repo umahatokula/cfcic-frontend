@@ -25,10 +25,10 @@ function AttendanceRequiredServices({ event, isRegistrationOpen }: EventProps) {
 
   const onSubmit = (data: any) => {
 
-    setRegistration({ ...data, event_id: event?.id });
+    const registrationObj = { ...data, event_id: event?.id };
 
     const validatedData = formatEventRegistrationData(
-      registration,
+      registrationObj,
       event?.id,
       user?.id
     );
