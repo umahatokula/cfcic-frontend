@@ -28,9 +28,9 @@ function NewDependents() {
       newKid.allergies &&
       newKid.emergency_contact
     ) {
-    //   setKids([...kids, newKid]);
+      //   setKids([...kids, newKid]);
       const { new_dependents } = registration;
-      new_dependents?.push(newKid)
+      new_dependents?.push(newKid);
 
       setRegistration({ ...registration, new_dependents: new_dependents });
       reset();
@@ -64,6 +64,31 @@ function NewDependents() {
   };
 
   if (!isMounted) return;
+
+  return (
+    <>
+      <p className="my-20 text-xl text-center font-extralight">
+        Kindly register your kids{" "}
+        <a
+          href="https://bit.ly/FA23_RegisterYourKids"
+          className="text-accent"
+          target="_blank"
+        >
+          HERE
+        </a>{" "}
+      </p>
+
+      <div className="mt-20 gap-y-6 grid">
+        <button
+          onClick={handleCancel}
+          type="button"
+          className="link__btn__outline-primary block"
+        >
+          Proceed
+        </button>
+      </div>
+    </>
+  );
 
   return (
     <>

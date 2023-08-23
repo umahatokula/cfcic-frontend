@@ -42,8 +42,8 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
       in_person: "1",
     });
 
-    setRegFormStep(3)
-    router.push(`/events/register/${event?.id}?step=${3}`)
+    setRegFormStep(2)
+    router.push(`/events/register/${event?.id}?step=${2}`)
   };
 
   const onSubmitOnline = async (data: any) => {
