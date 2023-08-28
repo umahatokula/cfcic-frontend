@@ -19,7 +19,7 @@ export default function Home() {
         <AiOutlineBell className="text-white cursor-pointer" />
       </div>
       <Link
-        href={"/events"}
+        href={"/dashboard"}
         className="font-bold text-2xl p-5 bg-accent text-center text-white cursor-pointer block"
       >
         Register Now
