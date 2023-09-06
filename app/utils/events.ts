@@ -1,3 +1,5 @@
+import { getCookie } from "./auth";
+
 export function formatDateToMonthDayYear(isoDateString: string) {
   const isoDate = new Date(isoDateString);
 
@@ -27,8 +29,17 @@ export function formatDateToMonthDayYear(isoDateString: string) {
 
 // Get all events
 export async function getEvents() {
+  // get cookie
+  const csrfToken = getCookie('XSRF-TOKEN');
+
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/event`, {
     next: { revalidate: 10 },
+    headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+        'X-XSRF-TOKEN': decodeURIComponent(csrfToken!),
+    },
+    credentials: 'include',
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");

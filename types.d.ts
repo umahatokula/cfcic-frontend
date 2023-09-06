@@ -5,7 +5,7 @@ interface LoginFormInputs {
 
 interface RegisterFormInputs extends LoginFormInputs {
   name: string;
-  passwordConfirmation: string;
+  password_confirmation: string;
 }
 
 interface DashboardCard {

@@ -11,6 +11,7 @@ import { toast } from "react-hot-toast";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import CircleLoader from "react-spinners/CircleLoader";
 import { login } from "@/app/utils/auth";
+import axios from "@/lib/axios";
 
 const schema = yup.object({
   email: yup.string().required("Email is required"),
@@ -37,18 +38,11 @@ function LoginForm() {
     e.preventDefault();
     setloading(true);
 
-    const result = await login(data);
-    // console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ result:", result);
-    // console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ session:", session);
-    // console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ status:", status);
-
-    if (result?.error === "AccessDenied") {
-      toast.error(session?.user?.message || "Credentials do not match");
-      setloading(false);
-    } else {
-      setloading(false);
-      router.push("/dashboard");
-    }
+    const response = await axios.get(`/sanctum/csrf-cookie`);
+    const user = await login(data);
+    
+    if (user !== undefined) return router.push("/dashboard");
+    setloading(false);
   };
 
   useEffect(() => {

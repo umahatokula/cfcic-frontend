@@ -9,12 +9,14 @@ import { toast } from "react-hot-toast";
 import CircleLoader from "react-spinners/CircleLoader";
 import { signIn, useSession } from "next-auth/react";
 import { login } from "@/app/utils/auth";
+import axios from "@/lib/axios";
+import { useIsMounted } from "@/hooks/useIsMounted";
 
 const schema = yup.object({
   name: yup.string().required("Full name is required"),
   email: yup.string().required("Email is required"),
   password: yup.string().required("Password is required"),
-  passwordConfirmation: yup
+  password_confirmation: yup
     .string()
     .test("password-should-match", "Passwords must match", function (value) {
       return this.parent.password === value;
@@ -23,6 +25,7 @@ const schema = yup.object({
 });
 
 function RegistrationForm() {
+  const isMounted = useIsMounted();
   const [loading, setloading] = useState<boolean>(false);
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -39,39 +42,36 @@ function RegistrationForm() {
     try {
       setloading(true);
 
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "content-type": "application/json",
-          },
-        }
-      );
+      axios.get(`/sanctum/csrf-cookie`)
+      .then(async (response) => {
+        axios
+          .post(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, data)
+          .then(async (response) => {
+            const user = await login(data);
+            console.log(
+              "🚀 ~ file: RegistrationForm.tsx:50 ~ .then ~ user:",
+              user
+            );
 
-      if (!res.ok) {
-        toast.error("Error signing up");
-        throw new Error("Failed to fetch data");
-      }
-
-      const result = await login({
-        email: data.email,
-        password: data.password,
+            if (user !== undefined) router.push("/dashboard");
+            setloading(false);
+          })
+          .catch((error) => {
+            console.log(
+              "🚀 ~ file: auth.ts:17 ~ login ~ error:",
+              error.response.data.message
+            );
+            setloading(false);
+            toast.error(error.response.data.message);
+          });
       });
-
-      if (result?.error === "AccessDenied") {
-        toast.error(session?.user?.message || "Credentials do not match");
-        setloading(false);
-      } else {
-        setloading(false);
-        router.push("/dashboard");
-      }
     } catch (error) {
       setloading(false);
       console.log("error", error);
     }
   };
+
+  if (!isMounted) return;
 
   return (
     <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
@@ -137,18 +137,18 @@ function RegistrationForm() {
           <label>Confirm Password</label>
           <div
             className={`${
-              errors.passwordConfirmation ? "form__input_error" : "form__input"
+              errors.password_confirmation ? "form__input_error" : "form__input"
             } flex justify-between items-center`}
           >
             <input
               className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
               type="password"
-              {...register("passwordConfirmation", { required: true })}
+              {...register("password_confirmation", { required: true })}
             />
           </div>
           <span className="text-red-600 text-xs">
-            {errors.passwordConfirmation && (
-              <span>{errors.passwordConfirmation?.message}</span>
+            {errors.password_confirmation && (
+              <span>{errors.password_confirmation?.message}</span>
             )}
           </span>
         </div>

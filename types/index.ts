@@ -6,7 +6,7 @@ export type LoginFormInputs = {
 export type RegistrationFormInputs = {
   email: string;
   password: string;
-  passwordConfirmation: string;
+  password_confirmation: string;
 };
 
 export type BioDataInputs = {
@@ -38,25 +38,25 @@ export type Dependent = {
   last_name: string;
   birthday: string;
   allergies: string;
-  emergency_contact: string
-  parent_profile_id: string
+  emergency_contact: string;
+  parent_profile_id: string;
   // event_attendances AttendanceDependent[]
-}
+};
 
 export type ProfileServiceTeam = {
   service_team_id: number;
   profile_id: number;
-}
+};
 
 export type RolesAndResponsibilitiesProfile = {
   role_responsibility_id: number;
   profile_id: number;
-}
+};
 
 export type ChurchArmProfile = {
   church_arm_id: number;
   profile_id: number;
-}
+};
 
 export type KidsDataInputs = {
   isMember: boolean;
@@ -122,4 +122,4 @@ export type EventProps = {
 export type InfoCardProps = {
   iconUrl: string;
   content: string;
-}
+};

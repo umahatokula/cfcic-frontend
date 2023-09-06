@@ -18,6 +18,7 @@ declare module "next-auth" {
       statusCode?: number;
       message?: string;
       user: User;
+      errors: [];
     };
   }
   interface User extends DefaultUser {
