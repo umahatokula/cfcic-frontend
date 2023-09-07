@@ -12,6 +12,9 @@ import { useIsMounted } from "@/hooks/useIsMounted";
 import CircleLoader from "react-spinners/CircleLoader";
 import { login } from "@/app/utils/auth";
 import axios from "@/lib/axios";
+import { cookies } from "next/headers";
+import { useAppStore } from "@/lib/store";
+import api from "@/lib/axios";
 
 const schema = yup.object({
   email: yup.string().required("Email is required"),
@@ -24,6 +27,7 @@ function LoginForm() {
   const router = useRouter();
   const { data: session, status } = useSession();
   const isMounted = useIsMounted();
+  const { addUser } = useAppStore();
 
   const {
     register,
@@ -37,12 +41,21 @@ function LoginForm() {
   const onSubmit = async (data: any, e: any) => {
     e.preventDefault();
     setloading(true);
+    try {
+      const response = await api().get(`/sanctum/csrf-cookie`);
+      const loginResponse = await login(data);
+      const access_token = loginResponse.token as any;
+      const user = loginResponse.user;
 
-    const response = await axios.get(`/sanctum/csrf-cookie`);
-    const user = await login(data);
-    
-    if (user !== undefined) return router.push("/dashboard");
-    setloading(false);
+      if (user !== undefined) {
+        addUser(user, access_token);
+        return router.push("/dashboard");
+      }
+      setloading(false);
+    } catch (error) {
+      console.log("🚀 ~ file: LoginForm.tsx:47 ~ onSubmit ~ error:", error);
+      setloading(false);
+    }
   };
 
   useEffect(() => {

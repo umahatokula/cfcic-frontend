@@ -5,6 +5,7 @@ import Link from "next/link";
 import React from "react";
 
 function LoginPage() {
+
   return (
     <div className="w-full h-full flex flex-col justify-start items-center">
       <div className="text-center mb-20">

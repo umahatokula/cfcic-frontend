@@ -8,9 +8,11 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import CircleLoader from "react-spinners/CircleLoader";
 import { signIn, useSession } from "next-auth/react";
-import { login } from "@/app/utils/auth";
+import { login, registerUser } from "@/app/utils/auth";
 import axios from "@/lib/axios";
 import { useIsMounted } from "@/hooks/useIsMounted";
+import api from "@/lib/axios";
+import { useAppStore } from "@/lib/store";
 
 const schema = yup.object({
   name: yup.string().required("Full name is required"),
@@ -25,10 +27,10 @@ const schema = yup.object({
 });
 
 function RegistrationForm() {
-  const isMounted = useIsMounted();
   const [loading, setloading] = useState<boolean>(false);
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const isMounted = useIsMounted();
+  const { addUser } = useAppStore();
 
   const {
     register,
@@ -39,32 +41,20 @@ function RegistrationForm() {
     resolver: yupResolver(schema),
   });
   const onSubmit = async (data: any, e: any) => {
+    e.preventDefault();
+    setloading(true);
     try {
-      setloading(true);
+      const response = await api().get(`/sanctum/csrf-cookie`);
+      const registerUserResponse = await registerUser(data);
+      const loginResponse = await login(data);
+      const access_token = loginResponse.token as any;
+      const user = loginResponse.user;
 
-      axios.get(`/sanctum/csrf-cookie`)
-      .then(async (response) => {
-        axios
-          .post(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, data)
-          .then(async (response) => {
-            const user = await login(data);
-            console.log(
-              "🚀 ~ file: RegistrationForm.tsx:50 ~ .then ~ user:",
-              user
-            );
-
-            if (user !== undefined) router.push("/dashboard");
-            setloading(false);
-          })
-          .catch((error) => {
-            console.log(
-              "🚀 ~ file: auth.ts:17 ~ login ~ error:",
-              error.response.data.message
-            );
-            setloading(false);
-            toast.error(error.response.data.message);
-          });
-      });
+      if (user !== undefined) {
+        addUser(user, access_token);
+        return router.push("/dashboard");
+      }
+      setloading(false);
     } catch (error) {
       setloading(false);
       console.log("error", error);

@@ -1,4 +1,4 @@
-import { getCookie } from "./auth";
+import api from "@/lib/axios";
 
 export function formatDateToMonthDayYear(isoDateString: string) {
   const isoDate = new Date(isoDateString);
@@ -29,36 +29,38 @@ export function formatDateToMonthDayYear(isoDateString: string) {
 
 // Get all events
 export async function getEvents() {
-  // get cookie
-  const csrfToken = getCookie('XSRF-TOKEN');
-
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/event`, {
-    next: { revalidate: 10 },
-    headers: {
-        'content-type': 'application/json',
-        'accept': 'application/json',
-        'X-XSRF-TOKEN': decodeURIComponent(csrfToken!),
-    },
-    credentials: 'include',
-  });
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  const events = res.json();
+  const response = await api().get(`/sanctum/csrf-cookie`);
+  const events = api()
+    .get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/event`)
+    .then((res) => {
+      return res.data.data;
+    })
+    .catch((e) => {
+      console.log(
+        "🚀 ~ file: events.ts:39 ~ getEvents ~ e:",
+        e?.response?.data
+      );
+    });
 
   return events;
 }
 
 // Get single event
-export async function getSingleEvent(id: any) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/event/${id}`);
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
+export async function getSingleEvent(eventId: any) {
+  const response = await api().get(`/sanctum/csrf-cookie`);
+  const event = api()
+    .get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/event/${eventId}`)
+    .then((res) => {
+      return res.data.data;
+    })
+    .catch((e) => {
+      console.log(
+        "🚀 ~ file: events.ts:39 ~ getEvents ~ e:",
+        e?.response?.data
+      );
+    });
 
-  return res.json();
+  return event;
 }
 
 // format registration data properly
@@ -67,13 +69,12 @@ export function formatEventRegistrationData(
   event_id: string,
   user_id: string
 ) {
-
   const validatedData = {
     ...data,
     event_id: event_id,
     user_id: user_id,
     in_person: data.in_person == "1" ? true : false,
-    requires_accomodation: data.requires_accomodation == "1" ? true : false,
+    requires_accommodation: data.requires_accomodation == "1" ? true : false,
     requires_feeding: data.requires_feeding == "1" ? true : false,
     requires_transport: data.requires_transport == "1" ? true : false,
   };
@@ -86,22 +87,22 @@ export async function registerForEvent(
   validatedData: EventRegistrationAPIFormat,
   access_token: string
 ) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/attendance`, {
-    method: "POST",
-    body: JSON.stringify({
+  const response = await api().get(`/sanctum/csrf-cookie`);
+  const event = api()
+    .post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/attendance`, {
       ...validatedData,
-    }),
-    headers: {
-      "content-type": "application/json",
-      Authorization: "Bearer " + access_token,
-    },
-  });
+    })
+    .then((res) => {
+      return res.data.data;
+    })
+    .catch((e) => {
+      console.log(
+        "🚀 ~ file: events.ts:39 ~ getEvents ~ e:",
+        e?.response?.data
+      );
+    });
 
-  if (!res.ok) {
-    // throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
+  return event;
 }
 
 // Update event registration
@@ -149,7 +150,7 @@ export async function getUserEventRegistration(
   );
 
   if (!res.ok) {
-    throw new Error('Could not fetch user event registration')
+    throw new Error("Could not fetch user event registration");
   }
 
   return res.json();

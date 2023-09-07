@@ -4,13 +4,14 @@ import EventCard from "@/components/events/EventCard";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import { getAuthCookie } from "../actions";
 
 async function EventsPage() {
-  const events: Event[] = await getEvents();
-  const [upcomingEvent, ...otherevents] = events;
-  const session = await getServerSession(authOptions);
+  const token = await getAuthCookie();
+  if (!token) redirect("/login");
 
-  if (!session) redirect("/login");
+  const events: Event[] = (await getEvents());
+  const [upcomingEvent, ...otherevents] = events;
 
   return (
     <div>

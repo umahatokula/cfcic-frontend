@@ -42,8 +42,8 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
       in_person: "1",
     });
 
-    setRegFormStep(2)
-    router.push(`/events/register/${event?.id}?step=${2}`)
+    setRegFormStep(2);
+    router.push(`/events/register/${event?.id}?step=${2}`);
   };
 
   const onSubmitOnline = async (data: any) => {
@@ -58,6 +58,10 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
       registration,
       event?.id,
       user?.id
+    );
+    console.log(
+      "🚀 ~ file: AttendanceMode.tsx:62 ~ onSubmitOnline ~ validatedData:",
+      event
     );
 
     const reg = await registerForEvent(validatedData, access_token);
