@@ -1,8 +1,7 @@
-
 import { redirect } from "next/navigation";
 import React from "react";
 import { getAuthCookie } from "../actions";
-import Dashboard from "@/components/Dashboard";
+import Dashboard from "@/components/devotional/Dashboard";
 
 async function DashboardPage() {
   const token = await getAuthCookie();

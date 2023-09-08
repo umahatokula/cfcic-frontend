@@ -10,9 +10,15 @@ async function EventsPage() {
   const token = await getAuthCookie();
   if (!token) redirect("/login");
 
-  const events: Event[] = (await getEvents());
-  const [upcomingEvent, ...otherevents] = events;
+  let upcomingEvent;
+  let otherEvents: Event[] = [];
 
+  const events: Event[] = await getEvents();
+  if (events) {
+    [upcomingEvent, ...otherEvents] = events;
+  } else {
+    console.error("Events are undefined.");
+  }
   return (
     <div>
       <p className="text-[20px] leading-[30px] font-normal text-[#01080D] mb-8">
@@ -29,10 +35,10 @@ async function EventsPage() {
         </div>
       )}
 
-      {otherevents.length > 0 && (
+      {otherEvents.length > 0 && (
         <>
           <p className="text-base font-semibold mt-12 mb-6">More to come</p>
-          {otherevents.map((event) => (
+          {otherEvents.map((event) => (
             <div className="mt-10">
               <EventCard event={event} isRegistrationOpen={false} />
             </div>

@@ -141,7 +141,7 @@ interface EventRegistrationDatesAttending extends EventRegistrationBase {
 
 interface EventRegistrationAPIFormat extends EventRegistrationAllRequirements {
   requires_feeding: boolean;
-  requires_accomodation: boolean;
+  requires_accommodation: boolean;
   requires_transport: boolean;
   in_person: boolean;
 }
@@ -329,4 +329,13 @@ interface ProfileAPIFormat {
   roles_and_responsibilities: string[];
   service_team: string[];
   partnered_arms: string[];
+}
+
+
+interface Devotional {
+  title: string;
+  content: string;
+  date: string;
+  key_scripture: string;
+  devotional_author: string;
 }

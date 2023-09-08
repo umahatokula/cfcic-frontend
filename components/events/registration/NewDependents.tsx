@@ -41,10 +41,6 @@ function NewDependents() {
     const updatedDependents = registration?.new_dependents?.filter(
       (_, i) => i !== index
     );
-    console.log(
-      "🚀 ~ file: NewDependents.tsx:38 ~ handleRemoveKid ~ updatedDependents:",
-      updatedDependents
-    );
 
     setRegistration({ ...registration, new_dependents: updatedDependents });
   };
@@ -65,30 +61,30 @@ function NewDependents() {
 
   if (!isMounted) return;
 
-  return (
-    <>
-      <p className="my-20 text-xl text-center font-extralight">
-        Kindly register your kids{" "}
-        <a
-          href="https://bit.ly/FA23_RegisterYourKids"
-          className="text-accent"
-          target="_blank"
-        >
-          HERE
-        </a>{" "}
-      </p>
+  // return (
+  //   <>
+  //     <p className="my-20 text-xl text-center font-extralight">
+  //       Kindly register your kids{" "}
+  //       <a
+  //         href="https://bit.ly/FA23_RegisterYourKids"
+  //         className="text-accent"
+  //         target="_blank"
+  //       >
+  //         HERE
+  //       </a>{" "}
+  //     </p>
 
-      <div className="mt-20 gap-y-6 grid">
-        <button
-          onClick={handleCancel}
-          type="button"
-          className="link__btn__outline-primary block"
-        >
-          Proceed
-        </button>
-      </div>
-    </>
-  );
+  //     <div className="mt-20 gap-y-6 grid">
+  //       <button
+  //         onClick={handleCancel}
+  //         type="button"
+  //         className="link__btn__outline-primary block"
+  //       >
+  //         Proceed
+  //       </button>
+  //     </div>
+  //   </>
+  // );
 
   return (
     <>

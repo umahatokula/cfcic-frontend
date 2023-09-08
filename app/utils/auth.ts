@@ -2,51 +2,83 @@ import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import { deleteCookie, getCookie, setCookie } from "cookies-next";
 import router, { redirect } from "next/navigation";
-import api from "@/lib/axios";
 import { deleteAuthCookie, getAuthCookie, setAuthCookie } from "../actions";
+import api, { fetchCSRFToken } from "@/lib/axios";
+
 
 export async function login(data: LoginFormInputs) {
-  return api()
-    .post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, data)
-    .then((response) => {
-      // set cookie
-      logIn();
+  try {
+    // Fetch CSRF token before making the login request
+    await fetchCSRFToken();
 
-      return response.data;
-    })
-    .catch((error) => {
-      const message = error?.response?.data?.message;
-      if (message) toast.error(message);
-    });
+    const response = await (await api()).post("/auth/login", data);
+    const { token } = response.data;
+    logIn(token);
+
+    return {
+      status: 200,
+      data: response.data,
+    };
+  } catch (error) {
+    console.error("Login failed:", error);
+    if (error?.response?.status === 422) {
+      return {
+        status: 422,
+        data: error?.response?.data?.message,
+      };
+    }
+  }
 }
 
 export async function registerUser(data: RegisterFormInputs) {
-  return api()
-    .post(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, data)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      const message = error?.response?.data?.message;
-      if (message) toast.error(message);
-    });
+  try {
+    // Fetch CSRF token before making the login request
+    await fetchCSRFToken();
+
+    const response = await (await api()).post("/auth/register", data);
+    const { token } = response.data;
+    setAuthCookie(token);
+
+    return {
+      status: 200,
+      data: response.data,
+    };
+  } catch (error) {
+    console.error("Registering user failed:", error);
+    if (error instanceof Error) {
+      if (error.response?.status === 422) {
+        return {
+          status: 422,
+          data: error?.response?.data?.message,
+        };
+      }
+    }
+  }
 }
 
-export const isLoggedIn = (reqCookies = null) => {
-  // return !!getCookie("token");
-  return !!getAuthCookie();
+export const isLoggedIn = async (reqCookies = null) => {
+  await deleteAuthCookie()
+  console.log("🚀 ~ file: auth.ts:59 ~ isLoggedIn ~ reqCookies:", reqCookies)
+  // if we don't have request cookies, get the cookie from client
+  // if (!reqCookies) {
+  //   return !!getCookie("token");
+  // }
+  console.log("🚀 ~ file: auth.ts:65 ~ isLoggedIn ~ await getAuthCookie():", await getAuthCookie())
+
+  return !!(await getAuthCookie());
 };
 
-export const logIn = () => {
-  setCookie("token", true);
-  setAuthCookie();
+export const logIn = (token: string) => {
+  setCookie("token", token);
+  setAuthCookie(token);
 };
 
-export const logOut = () => {
-  console.log('Logging out...')
-  // remove logged in user's cookie and redirect to login page
+export const logOut = async () => {
+  const res = await (await api()).post("/auth/logout");
+  console.log("🚀 ~ file: auth.ts:70 ~ logOut ~ res:", res);
   deleteCookie("token");
-  // deleteAuthCookie();
+  deleteAuthCookie();
 
-  redirect("/login");
+  console.log("Logging out...");
+  window.location.href = "/login";
 };

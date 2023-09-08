@@ -15,14 +15,14 @@ export const emailLogin = async () => {
   return null;
 };
 
-export async function setAuthCookie() {
-  cookies().set('token', true)
+export async function setAuthCookie(token) {
+  cookies().set("auth_token", token);
 }
 
 export async function getAuthCookie() {
-  return cookies().get('token')
+  return cookies().get("auth_token")?.value;
 }
 
 export async function deleteAuthCookie() {
-  cookies().delete('token');
+  cookies().delete("auth_token");
 }

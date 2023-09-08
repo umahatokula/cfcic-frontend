@@ -118,7 +118,6 @@ function Menu({ open, setOpen }: MenuProps) {
                 <button
                   onClick={() => {
                     logOut();
-                    // router.push('/login')
 
                     clearAlert();
                     resetBiodata();
@@ -128,6 +127,8 @@ function Menu({ open, setOpen }: MenuProps) {
                     resetFinancialCommitments();
                     resetKidsDetails();
                     resetUser();
+                    
+                    router.push('/login')
                   }}
                   className="w-full bg-accent text-white py-2 rounded-2xl"
                 >

@@ -43,21 +43,19 @@ function RegistrationForm() {
   const onSubmit = async (data: any, e: any) => {
     e.preventDefault();
     setloading(true);
-    try {
-      const response = await api().get(`/sanctum/csrf-cookie`);
-      const registerUserResponse = await registerUser(data);
-      const loginResponse = await login(data);
-      const access_token = loginResponse.token as any;
-      const user = loginResponse.user;
 
-      if (user !== undefined) {
-        addUser(user, access_token);
-        return router.push("/dashboard");
-      }
+    const res = await registerUser(data);
+
+    if (res?.status == 200) {
       setloading(false);
-    } catch (error) {
+      const { user, token } = res?.data;
+      addUser(user, token);
+      router.push("/dashboard");
+    }
+
+    if (res?.status == 422) {
       setloading(false);
-      console.log("error", error);
+      toast.error(res?.data)
     }
   };
 

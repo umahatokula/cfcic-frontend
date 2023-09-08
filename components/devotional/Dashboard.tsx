@@ -2,7 +2,7 @@
 
 import React from "react";
 import DashboardCard from "./DashboardCard";
-import RegistrationPageDivider from "./events/registration/RegistrationPageDivider";
+import RegistrationPageDivider from "../events/registration/RegistrationPageDivider";
 import { useIsMounted } from "@/hooks/useIsMounted";
 
 function Dashboard() {

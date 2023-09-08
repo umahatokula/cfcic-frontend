@@ -1,4 +1,5 @@
 import api from "@/lib/axios";
+import { getAuthCookie } from "../actions";
 
 export function formatDateToMonthDayYear(isoDateString: string) {
   const isoDate = new Date(isoDateString);
@@ -29,9 +30,9 @@ export function formatDateToMonthDayYear(isoDateString: string) {
 
 // Get all events
 export async function getEvents() {
-  const response = await api().get(`/sanctum/csrf-cookie`);
-  const events = api()
-    .get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/event`)
+
+  const events = await (await api())
+    .get(`${process.env.NEXT_PUBLIC_API_URL}/event`)
     .then((res) => {
       return res.data.data;
     })
@@ -47,9 +48,8 @@ export async function getEvents() {
 
 // Get single event
 export async function getSingleEvent(eventId: any) {
-  const response = await api().get(`/sanctum/csrf-cookie`);
-  const event = api()
-    .get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/event/${eventId}`)
+  const event = (await api())
+    .get(`${process.env.NEXT_PUBLIC_API_URL}/event/${eventId}`)
     .then((res) => {
       return res.data.data;
     })
@@ -87,9 +87,8 @@ export async function registerForEvent(
   validatedData: EventRegistrationAPIFormat,
   access_token: string
 ) {
-  const response = await api().get(`/sanctum/csrf-cookie`);
-  const event = api()
-    .post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/attendance`, {
+  const event = (await api())
+    .post(`${process.env.NEXT_PUBLIC_API_URL}/attendance`, {
       ...validatedData,
     })
     .then((res) => {

@@ -25,7 +25,6 @@ function LoginForm() {
   const [loading, setloading] = useState<boolean>(false);
   const [showPasswordField, setShowPasswordField] = React.useState(false);
   const router = useRouter();
-  const { data: session, status } = useSession();
   const isMounted = useIsMounted();
   const { addUser } = useAppStore();
 
@@ -41,27 +40,21 @@ function LoginForm() {
   const onSubmit = async (data: any, e: any) => {
     e.preventDefault();
     setloading(true);
-    try {
-      const response = await api().get(`/sanctum/csrf-cookie`);
-      const loginResponse = await login(data);
-      const access_token = loginResponse.token as any;
-      const user = loginResponse.user;
 
-      if (user !== undefined) {
-        addUser(user, access_token);
-        return router.push("/dashboard");
-      }
+    const res = await login(data);
+
+    if (res?.status == 200) {
       setloading(false);
-    } catch (error) {
-      console.log("🚀 ~ file: LoginForm.tsx:47 ~ onSubmit ~ error:", error);
+      const { user, token } = res?.data;
+      addUser(user, token);
+      router.push("/dashboard");
+    }
+
+    if (res?.status == 422) {
       setloading(false);
+      toast.error(res?.data);
     }
   };
-
-  useEffect(() => {
-    // console.log("status", status);
-    // console.log("session", session);
-  }, [status]);
 
   if (!isMounted) return;
 
