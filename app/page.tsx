@@ -18,12 +18,12 @@ export default function Home() {
 
         <AiOutlineBell className="text-white cursor-pointer" />
       </div>
-      <Link
+      {/* <Link
         href={"/dashboard"}
         className="font-bold text-2xl p-5 bg-accent text-center text-white cursor-pointer block"
       >
         Register Now
-      </Link>
+      </Link> */}
       <div className="flex justify-center bg-primary">
         <Image src="/fa23.jpg" height={800} width={800} alt="Hero" />
       </div>

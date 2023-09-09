@@ -156,7 +156,7 @@ function RegistrationForm() {
 
       <div className="mt-16">
         <button
-          disabled={loading}
+          disabled={true}
           type="submit"
           className={`form__btn__default flex items-center justify-center`}
         >
