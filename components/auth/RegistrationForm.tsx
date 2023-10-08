@@ -8,13 +8,17 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import CircleLoader from "react-spinners/CircleLoader";
 import { signIn, useSession } from "next-auth/react";
-import { login } from "@/app/utils/auth";
+import { login, registerUser } from "@/app/utils/auth";
+import axios from "@/lib/axios";
+import { useIsMounted } from "@/hooks/useIsMounted";
+import api from "@/lib/axios";
+import { useAppStore } from "@/lib/store";
 
 const schema = yup.object({
   name: yup.string().required("Full name is required"),
   email: yup.string().required("Email is required"),
   password: yup.string().required("Password is required"),
-  passwordConfirmation: yup
+  password_confirmation: yup
     .string()
     .test("password-should-match", "Passwords must match", function (value) {
       return this.parent.password === value;
@@ -25,7 +29,8 @@ const schema = yup.object({
 function RegistrationForm() {
   const [loading, setloading] = useState<boolean>(false);
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const isMounted = useIsMounted();
+  const { addUser } = useAppStore();
 
   const {
     register,
@@ -36,42 +41,25 @@ function RegistrationForm() {
     resolver: yupResolver(schema),
   });
   const onSubmit = async (data: any, e: any) => {
-    try {
-      setloading(true);
+    e.preventDefault();
+    setloading(true);
 
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "content-type": "application/json",
-          },
-        }
-      );
+    const res = await registerUser(data);
 
-      if (!res.ok) {
-        toast.error("Error signing up");
-        throw new Error("Failed to fetch data");
-      }
-
-      const result = await login({
-        email: data.email,
-        password: data.password,
-      });
-
-      if (result?.error === "AccessDenied") {
-        toast.error(session?.user?.message || "Credentials do not match");
-        setloading(false);
-      } else {
-        setloading(false);
-        router.push("/dashboard");
-      }
-    } catch (error) {
+    if (res?.status == 200) {
       setloading(false);
-      console.log("error", error);
+      const { user, token } = res?.data;
+      addUser(user, token);
+      router.push("/dashboard");
+    }
+
+    if (res?.status == 422) {
+      setloading(false);
+      toast.error(res?.data)
     }
   };
+
+  if (!isMounted) return;
 
   return (
     <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
@@ -137,18 +125,18 @@ function RegistrationForm() {
           <label>Confirm Password</label>
           <div
             className={`${
-              errors.passwordConfirmation ? "form__input_error" : "form__input"
+              errors.password_confirmation ? "form__input_error" : "form__input"
             } flex justify-between items-center`}
           >
             <input
               className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
               type="password"
-              {...register("passwordConfirmation", { required: true })}
+              {...register("password_confirmation", { required: true })}
             />
           </div>
           <span className="text-red-600 text-xs">
-            {errors.passwordConfirmation && (
-              <span>{errors.passwordConfirmation?.message}</span>
+            {errors.password_confirmation && (
+              <span>{errors.password_confirmation?.message}</span>
             )}
           </span>
         </div>

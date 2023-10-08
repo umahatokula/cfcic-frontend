@@ -11,6 +11,10 @@ import { toast } from "react-hot-toast";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import CircleLoader from "react-spinners/CircleLoader";
 import { login } from "@/app/utils/auth";
+import axios from "@/lib/axios";
+import { cookies } from "next/headers";
+import { useAppStore } from "@/lib/store";
+import api from "@/lib/axios";
 
 const schema = yup.object({
   email: yup.string().required("Email is required"),
@@ -21,8 +25,8 @@ function LoginForm() {
   const [loading, setloading] = useState<boolean>(false);
   const [showPasswordField, setShowPasswordField] = React.useState(false);
   const router = useRouter();
-  const { data: session, status } = useSession();
   const isMounted = useIsMounted();
+  const { addUser } = useAppStore();
 
   const {
     register,
@@ -37,24 +41,20 @@ function LoginForm() {
     e.preventDefault();
     setloading(true);
 
-    const result = await login(data);
-    // console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ result:", result);
-    // console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ session:", session);
-    // console.log("🚀 ~ file: LoginForm.tsx:43 ~ onSubmit ~ status:", status);
+    const res = await login(data);
 
-    if (result?.error === "AccessDenied") {
-      toast.error(session?.user?.message || "Credentials do not match");
+    if (res?.status == 200) {
       setloading(false);
-    } else {
-      setloading(false);
+      const { user, token } = res?.data;
+      addUser(user, token);
       router.push("/dashboard");
     }
-  };
 
-  useEffect(() => {
-    // console.log("status", status);
-    // console.log("session", session);
-  }, [status]);
+    if (res?.status == 422) {
+      setloading(false);
+      toast.error(res?.data);
+    }
+  };
 
   if (!isMounted) return;
 

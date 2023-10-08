@@ -4,14 +4,21 @@ import EventCard from "@/components/events/EventCard";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import { getAuthCookie } from "../actions";
 
 async function EventsPage() {
+  const token = await getAuthCookie();
+  if (!token) redirect("/login");
+
+  let upcomingEvent;
+  let otherEvents: Event[] = [];
+
   const events: Event[] = await getEvents();
-  const [upcomingEvent, ...otherevents] = events;
-  const session = await getServerSession(authOptions);
-
-  if (!session) redirect("/login");
-
+  if (events) {
+    [upcomingEvent, ...otherEvents] = events;
+  } else {
+    console.error("Events are undefined.");
+  }
   return (
     <div>
       <p className="text-[20px] leading-[30px] font-normal text-[#01080D] mb-8">
@@ -28,10 +35,10 @@ async function EventsPage() {
         </div>
       )}
 
-      {otherevents.length > 0 && (
+      {otherEvents.length > 0 && (
         <>
           <p className="text-base font-semibold mt-12 mb-6">More to come</p>
-          {otherevents.map((event) => (
+          {otherEvents.map((event) => (
             <div className="mt-10">
               <EventCard event={event} isRegistrationOpen={false} />
             </div>

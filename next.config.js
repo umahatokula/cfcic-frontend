@@ -9,6 +9,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "cfm-media-audio.s3.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "cfcic.christfamilyministries.org",
+      },
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
+      },
     ],
   },
 };

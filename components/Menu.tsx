@@ -6,6 +6,7 @@ import { useClickOutside } from "@mantine/hooks";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useAppStore } from "@/lib/store";
+import { logOut } from "@/app/utils/auth";
 
 interface MenuProps {
   open: boolean;
@@ -116,8 +117,7 @@ function Menu({ open, setOpen }: MenuProps) {
               <li className="mt-5 py-3">
                 <button
                   onClick={() => {
-                    signOut();
-                    router.push('/login')
+                    logOut();
 
                     clearAlert();
                     resetBiodata();
@@ -127,6 +127,8 @@ function Menu({ open, setOpen }: MenuProps) {
                     resetFinancialCommitments();
                     resetKidsDetails();
                     resetUser();
+                    
+                    router.push('/login')
                   }}
                   className="w-full bg-accent text-white py-2 rounded-2xl"
                 >

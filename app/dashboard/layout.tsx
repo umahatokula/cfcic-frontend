@@ -1,10 +1,13 @@
-import DashboardHeader from "@/components/DashboardHeader";
+import DashboardHeader from "@/components/devotional/DashboardHeader";
+import { getTodaysDevotional } from "../utils/devotionals";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children, // will be a page or nested layout
 }: {
   children: React.ReactNode;
 }) {
+
+
   return (
     <div className="w-full flex justify-center bg-[#FBFBFB]">
       {/* <Alert /> */}
