@@ -65,11 +65,13 @@ function AttendanceMode({ event, isRegistrationOpen }: EventProps) {
     );
 
     const reg = await registerForEvent(validatedData, access_token);
-    toast.success("Successful");
-    resetRegistration();
-    // resetEvent();
-
-    router.push(`/events/register/success`);
+    if (reg.status) {
+      toast.success(reg.message);
+      resetRegistration();
+      router.push(`/events/register/success`);
+    } else {
+      toast.error(reg.message);
+    }
   };
 
   return (

@@ -46,7 +46,7 @@ function NewDependents() {
   };
 
   const handleSubmitKids = () => {
-    console.log(kids);
+    console.log("kids", registration?.new_dependents);
     setRegistration({ ...registration });
 
     router.push(`/events/register/${currentEvent?.id}?step=${3}`);

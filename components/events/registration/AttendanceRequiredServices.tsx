@@ -1,4 +1,9 @@
-import { formatEventRegistrationData, registerForEvent } from "@/app/utils/events";
+"use client";
+
+import {
+  formatEventRegistrationData,
+  registerForEvent,
+} from "@/app/utils/events";
 import Button from "@/components/forms/Button";
 import { useAppStore } from "@/lib/store";
 import { useSession } from "next-auth/react";
@@ -8,9 +13,14 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 function AttendanceRequiredServices({ event, isRegistrationOpen }: EventProps) {
-
-  const { access_token, registration, user, setRegistration, resetEvent, resetRegistration } =
-    useAppStore();
+  const {
+    access_token,
+    registration,
+    user,
+    setRegistration,
+    resetEvent,
+    resetRegistration,
+  } = useAppStore();
 
   const router = useRouter();
 
@@ -23,8 +33,7 @@ function AttendanceRequiredServices({ event, isRegistrationOpen }: EventProps) {
     defaultValues: { ...registration },
   });
 
-  const onSubmit = (data: any) => {
-
+  const onSubmit = async (data: any) => {
     const registrationObj = { ...data, event_id: event?.id };
 
     const validatedData = formatEventRegistrationData(
@@ -33,12 +42,14 @@ function AttendanceRequiredServices({ event, isRegistrationOpen }: EventProps) {
       user?.id
     );
 
-    const reg = registerForEvent(validatedData, access_token);
-    toast.success('Successful')
-    resetRegistration();
-    // resetEvent();
-
-    router.push(`/events/register/success`);
+    const reg = await registerForEvent(validatedData, access_token);
+    if (reg.status) {
+      toast.success(reg.message);
+      resetRegistration();
+      router.push(`/events/register/success`);
+    } else {
+      toast.error(reg.message);
+    }
   };
 
   return (
