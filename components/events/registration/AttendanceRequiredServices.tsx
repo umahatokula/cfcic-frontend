@@ -8,11 +8,13 @@ import Button from "@/components/forms/Button";
 import { useAppStore } from "@/lib/store";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import CircleLoader from "react-spinners/CircleLoader";
 
 function AttendanceRequiredServices({ event, isRegistrationOpen }: EventProps) {
+  const [loading, setloading] = useState<boolean>(false);
   const {
     access_token,
     registration,
@@ -34,6 +36,7 @@ function AttendanceRequiredServices({ event, isRegistrationOpen }: EventProps) {
   });
 
   const onSubmit = async (data: any) => {
+    setloading(true);
     const registrationObj = { ...data, event_id: event?.id };
 
     const validatedData = formatEventRegistrationData(
@@ -45,10 +48,12 @@ function AttendanceRequiredServices({ event, isRegistrationOpen }: EventProps) {
     const reg = await registerForEvent(validatedData, access_token);
     if (reg.status) {
       toast.success(reg.message);
+      setloading(false);
       resetRegistration();
       router.push(`/events/register/success`);
     } else {
       toast.error(reg.message);
+      setloading(false);
     }
   };
 
@@ -111,14 +116,14 @@ function AttendanceRequiredServices({ event, isRegistrationOpen }: EventProps) {
           </div>
         </div>
 
-        <div className="mt-20">
-          <Button
-            bgColor="bg-accent"
-            textColor="text-white"
-            borderColor="border-[#77858C]"
+        <div className="mt-16">
+          <button
             type="submit"
-            btnText="Register"
-          />
+            className={`form__btn__default flex items-center justify-center`}
+          >
+            <span className="mr-3">Register</span>
+            <CircleLoader color="#eecba3" size={20} loading={loading} />
+          </button>
         </div>
       </form>
     </>

@@ -18,12 +18,12 @@
   [multiple],
   textarea,
   select {
-    @apply w-full h-11 rounded-none shadow-sm focus:border-[#FFD700]  focus:ring-[#FFD700] border border-black text-[15px] bg-[#F9F9F9];
+    @apply w-full h-11 rounded-none shadow-sm focus:border-[#03045E]  focus:ring-[#03045E] border border-black text-[15px] bg-[#F9F9F9];
   }
 
   [type="checkbox"],
   [type="radio"] {
-    @apply border-gray-300 rounded text-[#FFD700] focus:ring-[#FFD700];
+    @apply border-gray-300 rounded text-[#03045E] focus:ring-[#03045E];
   }
 
   label {
@@ -103,9 +103,9 @@ select {
 }
 
 .link__btn__default {
-  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-4 bg-accent text-white border-[#77858C] block;
+  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-4 bg-accent text-white border-[#77858C];
 }
 
 .link__btn__outline-primary {
-  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-4 bg-transparent text-[#03045E] border-[1.5px] border-[#03045E] block;
+  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-4 bg-transparent text-[#03045E] border-[1.5px] border-[#03045E];
 }
