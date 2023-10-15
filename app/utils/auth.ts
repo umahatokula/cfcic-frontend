@@ -21,9 +21,11 @@ export async function login(data: LoginFormInputs) {
     };
   } catch (error) {
     console.error("Login failed:", error);
+    //@ts-ignore
     if (error?.response?.status === 422) {
       return {
         status: 422,
+        //@ts-ignore
         data: error?.response?.data?.message,
       };
     }
@@ -49,6 +51,7 @@ export async function registerUser(data: RegisterFormInputs) {
       if (error.response?.status === 422) {
         return {
           status: 422,
+          //@ts-ignore
           data: error?.response?.data?.message,
         };
       }
