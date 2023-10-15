@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  [type="text"],
+  [type="email"],
+  [type="url"],
+  [type="password"],
+  [type="number"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="week"],
+  [multiple],
+  textarea,
+  select {
+    @apply w-full h-11 rounded-none shadow-sm focus:border-[#FFD700]  focus:ring-[#FFD700] border border-black text-[15px] bg-[#F9F9F9];
+  }
+
+  [type="checkbox"],
+  [type="radio"] {
+    @apply border-gray-300 rounded text-[#FFD700] focus:ring-[#FFD700];
+  }
+
+  label {
+    @apply text-[18px] leading-[27px] font-normal;
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -26,7 +55,6 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-
 .h1 {
   @apply text-[25px] font-bold leading-[38px];
 }
@@ -43,11 +71,13 @@ body {
   @apply text-[12px] font-semibold leading-[18px];
 }
 
-.form__input, .form__select {
+.form__input,
+.form__select {
   @apply w-full rounded-xl h-[55px] border-2 bg-white;
 }
 
-.form__input_error, .form__select_error {
+.form__input_error,
+.form__select_error {
   @apply w-full rounded-xl h-[55px] border border-red-600 bg-white px-4;
 }
 
@@ -59,7 +89,8 @@ label {
   @apply text-xs font-bold;
 }
 
-input, select {
+input,
+select {
   @apply px-4 py-2 focus-visible:outline-none;
 }
 
