@@ -48,6 +48,7 @@ export async function registerUser(data: RegisterFormInputs) {
   } catch (error) {
     console.error("Registering user failed:", error);
     if (error instanceof Error) {
+      //@ts-ignore
       if (error.response?.status === 422) {
         return {
           status: 422,
