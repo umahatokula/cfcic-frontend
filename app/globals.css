@@ -85,6 +85,10 @@ body {
   @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-4 bg-accent text-white border-[#77858C];
 }
 
+.form__btn__default_disabled {
+  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-4 bg-accentDisabled text-black border-[#77858C];
+}
+
 label {
   @apply text-xs font-bold;
 }

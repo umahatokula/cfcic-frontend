@@ -8,6 +8,17 @@ interface RegisterFormInputs extends LoginFormInputs {
   password_confirmation: string;
 }
 
+interface ForgotPasswordFormInputs {
+  email: string;
+}
+
+interface ResetPasswordFormInputs {
+  email: string;
+  token: string;
+  password: string;
+  password_confirmation: string;
+}
+
 interface DashboardCard {
   link: string;
   img: string;
@@ -338,4 +349,8 @@ interface Devotional {
   date: string;
   key_scripture: string;
   devotional_author: string;
+}
+
+interface ResetPasswordProps {
+    token: string
 }

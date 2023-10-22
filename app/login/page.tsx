@@ -5,7 +5,6 @@ import Link from "next/link";
 import React from "react";
 
 function LoginPage() {
-
   return (
     <div className="w-full h-full flex flex-col justify-start items-center">
       <div className="text-center mb-20">
@@ -29,6 +28,13 @@ function LoginPage() {
         Not yet registered? Please{" "}
         <Link href={"/register"}>
           <span className="text-accent">Create an Account</span>
+        </Link>
+      </p>
+
+      <p className="text-base font-semibold mt-12">
+        Forgot your password?{" "}
+        <Link href={"/forgot-password"}>
+          <span className="text-accent">Reset it</span>
         </Link>
       </p>
     </div>
