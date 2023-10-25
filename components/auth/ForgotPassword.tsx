@@ -43,6 +43,7 @@ function ForgotPassword() {
     if (res) {
       if (res?.status == 200) {
         toast.success(res?.data);
+        router.push("/login");
       } else {
         toast.error(res?.data);
       }
