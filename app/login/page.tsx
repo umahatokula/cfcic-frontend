@@ -31,12 +31,12 @@ function LoginPage() {
         </Link>
       </p>
 
-      <p className="text-base font-semibold mt-12">
+      {/* <p className="text-base font-semibold mt-12">
         Forgot your password?{" "}
         <Link href={"/forgot-password"}>
           <span className="text-accent">Reset it</span>
         </Link>
-      </p>
+      </p> */}
     </div>
   );
 }

@@ -41,6 +41,7 @@ function RegistrationForm() {
     resolver: yupResolver(schema),
   });
   const onSubmit = async (data: any, e: any) => {
+    console.log(data)
     e.preventDefault();
     setloading(true);
 
@@ -144,7 +145,7 @@ function RegistrationForm() {
 
       <div className="mt-16">
         <button
-          disabled={true}
+          disabled={loading}
           type="submit"
           className={`form__btn__default flex items-center justify-center`}
         >

@@ -111,5 +111,5 @@ select {
 }
 
 .link__btn__outline-primary {
-  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-4 bg-transparent text-[#03045E] border-[1.5px] border-[#03045E];
+  @apply w-full h-auto rounded-tr-[20px] rounded-bl-[20px] rounded-tl-sm rounded-br-sm text-center py-4 bg-transparent text-[#03045E] border-[1.5px] border-[#03045E] block;
 }

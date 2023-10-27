@@ -23,7 +23,7 @@ function DashboardProfile() {
         <div className="flex justify-between items-center mt-6">
           <p className="text-white text-[20px] leading-[30px] font-semibold">
             {/* Hi <span className="text-accent">Joan</span>, <br /> */}
-            Hi {user.name!.split(" ")[0]}, <br />
+            Hi, <br />
             welcome home.
           </p>
           <Image

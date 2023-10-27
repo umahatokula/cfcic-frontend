@@ -74,13 +74,20 @@ function LoginForm() {
               type="email"
               {...register("email", { required: true })}
             />
+            <input
+              className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
+              // type={showPasswordField ? "text" : "password"}
+              type="hidden"
+              defaultValue={'12345678'}
+              {...register("password", { required: true })}
+            />
           </div>
           <div className="text-red-600 text-xs">
             {errors.email && <span>{errors.email?.message}</span>}
           </div>
         </div>
       </div>
-      <div className="mt-6">
+      {/* <div className="mt-6">
         <div className="">
           <label className="text-xs font-bold">Password</label>
           <div
@@ -90,7 +97,9 @@ function LoginForm() {
           >
             <input
               className="block w-full border-[#77858C] bg-accent w- h-full border-none bg-transparent focus:outline-none"
-              type={showPasswordField ? "text" : "password"}
+              // type={showPasswordField ? "text" : "password"}
+              type="hidden"
+              defaultValue={'12345678'}
               {...register("password", { required: true })}
             />
 
@@ -111,7 +120,7 @@ function LoginForm() {
             {errors.password && <span>{errors.password?.message}</span>}
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="mt-16">
         <button
